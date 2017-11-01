@@ -4,30 +4,28 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
-@Document(indexName = "cityindex", type = "city")
+@Document(indexName = "province", type = "city")
 public class City implements Serializable {
 
     private static final long serialVersionUID = -1L;
 
-    /**
-     * 城市编号
-     */
     private Long id;
 
-    /**
-     * 省份编号
-     */
     private Long provinceid;
 
-    /**
-     * 城市名称
-     */
     private String cityname;
 
-    /**
-     * 描述
-     */
     private String description;
+
+    private Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 
     public Long getId() {
         return id;
