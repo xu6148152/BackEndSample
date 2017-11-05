@@ -1,8 +1,6 @@
 package com.binea.domain;
 
 
-import org.springframework.data.annotation.Id;
-
 /**
  * Created by binea
  * Date: 4/11/2017
@@ -10,7 +8,7 @@ import org.springframework.data.annotation.Id;
  */
 public class User {
 
-    @Id
+//    @Id
     private Long id;
 
     private String name;

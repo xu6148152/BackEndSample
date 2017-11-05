@@ -1,6 +1,8 @@
 package com.binea.web;
 
 import com.binea.exception.MyException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class HelloController {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @ResponseBody
     @RequestMapping("/hello")
     public String hello() throws MyException {
-        throw new MyException("exception happened");
-//        return "Hello, world";
+//        throw new MyException("exception happened");
+        logger.debug("Logger Level : DEBUG");
+        logger.info("Logger Level : INFO");
+        logger.error("Logger Level : ERROR");
+        return "Hello, world";
     }
 
     @RequestMapping("/thymeleaf")

@@ -1,16 +1,16 @@
 package com.binea;
 
-import com.binea.domain.User;
-import com.binea.repository.UserRepository;
+import com.binea.async.AsyncTask;
 import com.binea.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.concurrent.Future;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,17 +18,22 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = {SpringWebApplication.class})
 public class SpringWebApplicationTests {
 
+//    private static final Logger LOGGER = LoggerFactory.getLogger(SpringWebApplicationTests.class);
+
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
 
-    @Autowired
-    private RedisTemplate<String, User> redisUserTemplate;
+//    @Autowired
+//    private RedisTemplate<String, User> redisUserTemplate;
 
     @Autowired
     private StringRedisTemplate redisStringTemplate;
+
+    @Autowired
+    private AsyncTask task;
 
     @Before
     public void setUp() {
@@ -82,38 +87,63 @@ public class SpringWebApplicationTests {
 
     @Test
     public void testRedis() {
-        redisStringTemplate.opsForValue().set("aaa", "111");
-        assertEquals("111", redisStringTemplate.opsForValue().get("aaa"));
-
-        User user = new User(1L, "binea1", 20);
-        redisUserTemplate.opsForValue().set(user.getName(), user);
-
-        user = new User(1L, "binea2", 21);
-        redisUserTemplate.opsForValue().set(user.getName(), user);
-
-        user = new User(1L, "binea3", 22);
-        redisUserTemplate.opsForValue().set(user.getName(), user);
-
-        assertEquals(20, redisUserTemplate.opsForValue().get("binea1").getAge().intValue());
-        assertEquals(21, redisUserTemplate.opsForValue().get("binea2").getAge().intValue());
-        assertEquals(22, redisUserTemplate.opsForValue().get("binea3").getAge().intValue());
+//        redisStringTemplate.opsForValue().set("aaa", "111");
+//        assertEquals("111", redisStringTemplate.opsForValue().get("aaa"));
+//
+//        User user = new User(1L, "binea1", 20);
+//        redisUserTemplate.opsForValue().set(user.getName(), user);
+//
+//        user = new User(1L, "binea2", 21);
+//        redisUserTemplate.opsForValue().set(user.getName(), user);
+//
+//        user = new User(1L, "binea3", 22);
+//        redisUserTemplate.opsForValue().set(user.getName(), user);
+//
+//        assertEquals(20, redisUserTemplate.opsForValue().get("binea1").getAge().intValue());
+//        assertEquals(21, redisUserTemplate.opsForValue().get("binea2").getAge().intValue());
+//        assertEquals(22, redisUserTemplate.opsForValue().get("binea3").getAge().intValue());
     }
 
     @Test
     public void testMongodb() throws Exception {
-        userRepository.save(new User(1L, "binea1", 20));
-        userRepository.save(new User(2L, "binea2", 21));
-        userRepository.save(new User(3L, "binea3", 22));
-
-        assertEquals(3, userRepository.findAll().size());
-
-        User u = userRepository.findOne(1L);
-        userRepository.delete(u);
-        assertEquals(2, userRepository.findAll().size());
-
-        u = userRepository.findByName("binea2");
-        userRepository.delete(u);
-        assertEquals(1, userRepository.findAll().size());
+//        userRepository.save(new User(1L, "binea1", 20));
+//        userRepository.save(new User(2L, "binea2", 21));
+//        userRepository.save(new User(3L, "binea3", 22));
+//
+//        assertEquals(3, userRepository.findAll().size());
+//
+//        User u = userRepository.findOne(1L);
+//        userRepository.delete(u);
+//        assertEquals(2, userRepository.findAll().size());
+//
+//        u = userRepository.findByName("binea2");
+//        userRepository.delete(u);
+//        assertEquals(1, userRepository.findAll().size());
     }
 
+    @Test
+    public void testAsyncTask() throws Exception {
+        long start = System.currentTimeMillis();
+
+        Future<String> task1 = task.doTaskOne();
+        Future<String> task2 = task.doTaskTwo();
+        Future<String> task3 = task.doTaskThree();
+
+        while (true) {
+            if (task1.isDone() && task2.isDone() && task3.isDone()) {
+                break;
+            }
+            Thread.sleep(1000);
+        }
+        long end = System.currentTimeMillis();
+
+        System.out.println("all tasks have done, elapsed time: " + (end - start) + " ms");
+    }
+
+    @Test
+    public void testLog4jConfig() {
+//        LOGGER.info("output info");
+//        LOGGER.debug("output debug");
+//        LOGGER.error("output error");
+    }
 }
