@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -25,7 +26,7 @@ public class HelloController {
         logger.debug("Logger Level : DEBUG");
         logger.info("Logger Level : INFO");
         logger.error("Logger Level : ERROR");
-        return "Hello, world";
+        return "hello";
     }
 
     @RequestMapping("/thymeleaf")
@@ -44,5 +45,15 @@ public class HelloController {
     public String velocity(ModelMap map) {
         map.addAttribute("host", "http://xu6148152.github.io");
         return "velocity";
+    }
+
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }
