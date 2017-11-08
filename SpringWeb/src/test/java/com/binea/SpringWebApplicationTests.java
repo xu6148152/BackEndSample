@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.concurrent.Future;
@@ -34,6 +36,9 @@ public class SpringWebApplicationTests {
 
     @Autowired
     private AsyncTask task;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Before
     public void setUp() {
@@ -145,5 +150,16 @@ public class SpringWebApplicationTests {
 //        LOGGER.info("output info");
 //        LOGGER.debug("output debug");
 //        LOGGER.error("output error");
+    }
+
+    @Test
+    public void sendSimpleMail() throws Exception {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("xubinggui@qq.com");
+        simpleMailMessage.setTo("xubinggui@qq.com");
+        simpleMailMessage.setSubject("Test");
+        simpleMailMessage.setText("测试邮件");
+
+        mailSender.send(simpleMailMessage);
     }
 }
