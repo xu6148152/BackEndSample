@@ -1,6 +1,7 @@
 package com.binea;
 
 import com.binea.async.AsyncTask;
+import com.binea.rabbit.Sender;
 import com.binea.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,9 @@ public class SpringWebApplicationTests {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private Sender sender;
 
     @Before
     public void setUp() {
@@ -161,5 +165,10 @@ public class SpringWebApplicationTests {
         simpleMailMessage.setText("测试邮件");
 
         mailSender.send(simpleMailMessage);
+    }
+
+    @Test
+    public void testRabbitMQ() throws Exception {
+        sender.send();
     }
 }
