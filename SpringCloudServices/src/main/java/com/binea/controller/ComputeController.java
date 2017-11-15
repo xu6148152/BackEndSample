@@ -20,7 +20,7 @@ public class ComputeController {
     private final Logger LOGGER = LoggerFactory.getLogger(ComputeController.class);
 
     @Autowired
-    private ConsulDiscoveryClient client;
+    private DiscoveryClient client;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public int add(@RequestParam Integer a, @RequestParam Integer b) {
