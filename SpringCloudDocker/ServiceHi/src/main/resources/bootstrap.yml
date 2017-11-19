@@ -1,0 +1,9 @@
+server:
+  port:1122
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:1121/eureka/
+spring:
+  application:
+    name: service-hi

@@ -1,0 +1,8 @@
+server:
+  port:1121
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
