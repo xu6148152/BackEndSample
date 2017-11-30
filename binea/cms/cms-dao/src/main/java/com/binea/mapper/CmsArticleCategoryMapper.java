@@ -1,6 +1,10 @@
 package com.binea.mapper;
 
+import com.binea.model.CmsArticleCategory;
+import com.binea.model.CmsArticleCategoryExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Created by binea

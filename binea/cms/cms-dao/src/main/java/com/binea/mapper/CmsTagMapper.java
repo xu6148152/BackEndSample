@@ -1,6 +1,10 @@
 package com.binea.mapper;
 
+import com.binea.model.CmsTag;
+import com.binea.model.CmsTagExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Created by binea
