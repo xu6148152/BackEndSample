@@ -1,2 +1,5 @@
 .idea/*
 SpringBootDemo.iml
+binea/common/target/*
+binea/cms/cms-service/target/*
+binea/cms/cms-dao/target/*

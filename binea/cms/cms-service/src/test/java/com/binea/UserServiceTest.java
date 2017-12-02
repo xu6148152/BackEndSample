@@ -4,18 +4,21 @@ import com.binea.cms.model.User;
 import com.binea.model.UserVO;
 import com.binea.service.UserService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by binea
  * Date: 29/11/2017
  * TIME: 10:35 PM
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration({
-//        "classpath:applicationContext.xml",
-//        "classpath:applicationContext-jdbc.xml"
-//})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({
+        "classpath:applicationContext.xml",
+        "classpath:applicationContext-jdbc.xml"
+})
 //@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class UserServiceTest {
 
