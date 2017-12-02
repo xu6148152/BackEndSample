@@ -1,22 +1,23 @@
-package com.binea.model;
+package com.binea.cms.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by binea
- * Date: 30/11/2017
- * TIME: 10:48 PM
+ * Date: 29/11/2017
+ * TIME: 10:12 PM
  */
-public class CmsArticleTagExample {
+
+public class BookExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CmsArticleTagExample() {
-        oredCriteria = new ArrayList<Criteria>();
+    public BookExample() {
+        oredCriteria = new ArrayList<>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -109,183 +110,193 @@ public class CmsArticleTagExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andArticleTagIdIsNull() {
-            addCriterion("article_tag_id is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdIsNotNull() {
-            addCriterion("article_tag_id is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdEqualTo(Integer value) {
-            addCriterion("article_tag_id =", value, "articleTagId");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdNotEqualTo(Integer value) {
-            addCriterion("article_tag_id <>", value, "articleTagId");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdGreaterThan(Integer value) {
-            addCriterion("article_tag_id >", value, "articleTagId");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("article_tag_id >=", value, "articleTagId");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdLessThan(Integer value) {
-            addCriterion("article_tag_id <", value, "articleTagId");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdLessThanOrEqualTo(Integer value) {
-            addCriterion("article_tag_id <=", value, "articleTagId");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdIn(List<Integer> values) {
-            addCriterion("article_tag_id in", values, "articleTagId");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdNotIn(List<Integer> values) {
-            addCriterion("article_tag_id not in", values, "articleTagId");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdBetween(Integer value1, Integer value2) {
-            addCriterion("article_tag_id between", value1, value2, "articleTagId");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleTagIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("article_tag_id not between", value1, value2, "articleTagId");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdIsNull() {
-            addCriterion("article_id is null");
+        public Criteria andUseridIsNull() {
+            addCriterion("userid is null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdIsNotNull() {
-            addCriterion("article_id is not null");
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdEqualTo(Integer value) {
-            addCriterion("article_id =", value, "articleId");
+        public Criteria andUseridEqualTo(Integer value) {
+            addCriterion("userid =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotEqualTo(Integer value) {
-            addCriterion("article_id <>", value, "articleId");
+        public Criteria andUseridNotEqualTo(Integer value) {
+            addCriterion("userid <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdGreaterThan(Integer value) {
-            addCriterion("article_id >", value, "articleId");
+        public Criteria andUseridGreaterThan(Integer value) {
+            addCriterion("userid >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("article_id >=", value, "articleId");
+        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
+            addCriterion("userid >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdLessThan(Integer value) {
-            addCriterion("article_id <", value, "articleId");
+        public Criteria andUseridLessThan(Integer value) {
+            addCriterion("userid <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("article_id <=", value, "articleId");
+        public Criteria andUseridLessThanOrEqualTo(Integer value) {
+            addCriterion("userid <=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdIn(List<Integer> values) {
-            addCriterion("article_id in", values, "articleId");
+        public Criteria andUseridIn(List<Integer> values) {
+            addCriterion("userid in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotIn(List<Integer> values) {
-            addCriterion("article_id not in", values, "articleId");
+        public Criteria andUseridNotIn(List<Integer> values) {
+            addCriterion("userid not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdBetween(Integer value1, Integer value2) {
-            addCriterion("article_id between", value1, value2, "articleId");
+        public Criteria andUseridBetween(Integer value1, Integer value2) {
+            addCriterion("userid between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andArticleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("article_id not between", value1, value2, "articleId");
+        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
+            addCriterion("userid not between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIsNull() {
-            addCriterion("tag_id is null");
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIsNotNull() {
-            addCriterion("tag_id is not null");
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdEqualTo(Integer value) {
-            addCriterion("tag_id =", value, "tagId");
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotEqualTo(Integer value) {
-            addCriterion("tag_id <>", value, "tagId");
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdGreaterThan(Integer value) {
-            addCriterion("tag_id >", value, "tagId");
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tag_id >=", value, "tagId");
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdLessThan(Integer value) {
-            addCriterion("tag_id <", value, "tagId");
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdLessThanOrEqualTo(Integer value) {
-            addCriterion("tag_id <=", value, "tagId");
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIn(List<Integer> values) {
-            addCriterion("tag_id in", values, "tagId");
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotIn(List<Integer> values) {
-            addCriterion("tag_id not in", values, "tagId");
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdBetween(Integer value1, Integer value2) {
-            addCriterion("tag_id between", value1, value2, "tagId");
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("tag_id not between", value1, value2, "tagId");
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
     }

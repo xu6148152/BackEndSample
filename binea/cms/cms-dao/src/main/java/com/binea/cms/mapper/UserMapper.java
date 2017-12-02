@@ -1,7 +1,7 @@
-package com.binea.mapper;
+package com.binea.cms.mapper;
 
-import com.binea.model.User;
-import com.binea.model.UserExample;
+import com.binea.cms.model.User;
+import com.binea.cms.model.UserExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.binea.mapper;
+package com.binea.cms.mapper;
 
-import com.binea.model.CmsTag;
-import com.binea.model.CmsTagExample;
+import com.binea.cms.model.CmsTag;
+import com.binea.cms.model.CmsTagExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

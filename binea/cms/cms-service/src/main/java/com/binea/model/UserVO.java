@@ -1,5 +1,8 @@
 package com.binea.model;
 
+import com.binea.cms.model.Book;
+import com.binea.cms.model.User;
+
 import java.util.List;
 
 /**

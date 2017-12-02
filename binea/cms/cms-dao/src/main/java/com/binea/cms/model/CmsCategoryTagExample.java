@@ -1,4 +1,4 @@
-package com.binea.model;
+package com.binea.cms.model;
 
 import java.util.ArrayList;
 import java.util.List;

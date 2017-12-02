@@ -1,7 +1,7 @@
 package com.binea.controller;
 
-import com.binea.model.User;
-import com.binea.model.UserExample;
+import com.binea.cms.model.User;
+import com.binea.cms.model.UserExample;
 import com.binea.service.UserService;
 import com.binea.utils.Paginator;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
-package com.binea.mapper;
+package com.binea.cms.mapper;
 
-import com.binea.model.CmsArticle;
-import com.binea.model.CmsArticleExample;
+import com.binea.cms.model.CmsArticle;
+import com.binea.cms.model.CmsArticleExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

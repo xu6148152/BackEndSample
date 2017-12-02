@@ -1,8 +1,8 @@
 package com.binea.service.impl;
 
-import com.binea.mapper.UserMapper;
+import com.binea.cms.mapper.UserMapper;
 import com.binea.mapper.UserVOMapper;
-import com.binea.model.User;
+import com.binea.cms.model.User;
 import com.binea.model.UserVO;
 import com.binea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

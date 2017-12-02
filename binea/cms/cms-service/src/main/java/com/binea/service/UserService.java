@@ -1,7 +1,7 @@
 package com.binea.service;
 
-import com.binea.mapper.UserMapper;
-import com.binea.model.User;
+import com.binea.cms.mapper.UserMapper;
+import com.binea.cms.model.User;
 import com.binea.model.UserVO;
 
 import java.util.List;

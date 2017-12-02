@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zheng.cms.mapper.BookMapper">
-    <resultMap id="BaseResultMap" type="com.zheng.cms.model.Book">
+<mapper namespace="com.binea.cms.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="com.binea.cms.model.Book">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="userid" jdbcType="INTEGER" property="userid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -69,7 +69,7 @@
     <sql id="Base_Column_List">
         id, userid, name
     </sql>
-    <select id="selectByExample" parameterType="com.zheng.cms.model.BookExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.binea.cms.model.BookExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -93,19 +93,19 @@
         delete from book
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.zheng.cms.model.BookExample">
+    <delete id="deleteByExample" parameterType="com.binea.cms.model.BookExample">
         delete from book
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.zheng.cms.model.Book">
+    <insert id="insert" parameterType="com.binea.cms.model.Book">
         insert into book (id, userid, name
         )
         values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.zheng.cms.model.Book">
+    <insert id="insertSelective" parameterType="com.binea.cms.model.Book">
         insert into book
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -130,7 +130,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.zheng.cms.model.BookExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.binea.cms.model.BookExample" resultType="java.lang.Integer">
         select count(*) from book
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -162,7 +162,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.Book">
+    <update id="updateByPrimaryKeySelective" parameterType="com.binea.cms.model.Book">
         update book
         <set>
             <if test="userid != null">
@@ -174,13 +174,13 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.Book">
+    <update id="updateByPrimaryKey" parameterType="com.binea.cms.model.Book">
         update book
         set userid = #{userid,jdbcType=INTEGER},
         name = #{name,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <resultMap id="BaseResultMap" type="com.zheng.cms.model.Book">
+    <resultMap id="BaseResultMap" type="com.binea.cms.model.Book">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="userid" jdbcType="INTEGER" property="userid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -248,7 +248,7 @@
     <sql id="Base_Column_List">
         id, userid, name
     </sql>
-    <select id="selectByExample" parameterType="com.zheng.cms.model.BookExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.binea.cms.model.BookExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -272,19 +272,19 @@
         delete from book
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.zheng.cms.model.BookExample">
+    <delete id="deleteByExample" parameterType="com.binea.cms.model.BookExample">
         delete from book
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.zheng.cms.model.Book">
+    <insert id="insert" parameterType="com.binea.cms.model.Book">
         insert into book (id, userid, name
         )
         values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.zheng.cms.model.Book">
+    <insert id="insertSelective" parameterType="com.binea.cms.model.Book">
         insert into book
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -309,7 +309,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.zheng.cms.model.BookExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="com.binea.cms.model.BookExample" resultType="java.lang.Integer">
         select count(*) from book
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -341,7 +341,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.Book">
+    <update id="updateByPrimaryKeySelective" parameterType="com.binea.cms.model.Book">
         update book
         <set>
             <if test="userid != null">
@@ -353,7 +353,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.Book">
+    <update id="updateByPrimaryKey" parameterType="com.binea.cms.model.Book">
         update book
         set userid = #{userid,jdbcType=INTEGER},
         name = #{name,jdbcType=VARCHAR}
