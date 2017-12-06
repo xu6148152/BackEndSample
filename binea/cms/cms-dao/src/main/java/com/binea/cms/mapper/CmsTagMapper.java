@@ -27,4 +27,11 @@ public interface CmsTagMapper {
     int updateByExampleSelective(@Param("record") CmsTag record, @Param("example") CmsTagExample example);
 
     int updateByExample(@Param("record") CmsTag record, @Param("example") CmsTagExample example);
+
+    CmsTag selectByPrimaryKey(Integer tagId);
+
+    int updateByPrimaryKeySelective(CmsTag record);
+
+    int updateByPrimaryKey(CmsTag record);
+
 }

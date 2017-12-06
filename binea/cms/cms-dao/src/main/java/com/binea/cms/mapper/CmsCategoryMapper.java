@@ -27,4 +27,11 @@ public interface CmsCategoryMapper {
     int updateByExampleSelective(@Param("record") CmsCategory record, @Param("example") CmsCategoryExample example);
 
     int updateByExample(@Param("record") CmsCategory record, @Param("example") CmsCategoryExample example);
+
+    CmsCategory selectByPrimaryKey(Integer categoryId);
+
+    int updateByPrimaryKeySelective(CmsCategory record);
+
+    int updateByPrimaryKey(CmsCategory record);
+
 }
