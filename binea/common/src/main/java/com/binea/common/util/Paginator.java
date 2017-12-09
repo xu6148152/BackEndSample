@@ -1,24 +1,20 @@
-package com.binea.utils;
-
-import com.binea.common.util.PageUtil;
-
-import java.util.Arrays;
+package com.binea.common.util;
 
 /**
  * Created by binea
- * Date: 28/11/2017
- * TIME: 10:43 PM
+ * Date: 9/12/2017
+ * TIME: 3:06 PM
  */
 public class Paginator {
 
-    private long total = 0;
-    private int page = 1;
-    private long totalPage = 1;
-    private int rows = 10;
-    private int step = 5;
-    private String param = "page";
-    private String url = "";
-    private String query = "";
+    private long total = 0l;            // 总记录数
+    private int page = 1;                // 当前页数
+    private long totalPage = 1;            // 总页数
+    private int rows = 10;                // 每页记录数
+    private int step = 5;                // 最多显示分页页码数
+    private String param = "page";        // 分页参数名称，用于支持一个页面多个分页功能
+    private String url = "";            // 项目路径
+    private String query = "";            // 当前页所有参数
 
     public long getTotal() {
         return total;
@@ -26,6 +22,11 @@ public class Paginator {
 
     public void setTotal(long total) {
         this.total = total;
+        this.initTotalPage();
+    }
+
+    public int getPage() {
+        return page;
     }
 
     public void setPage(int page) {
@@ -40,23 +41,17 @@ public class Paginator {
         this.totalPage = totalPage;
     }
 
-    public void setRows(int rows) {
-        if (rows > 1000) {
-            rows = 1000;
-        }
-        this.rows = rows;
-        initTotalPage();
+    public int getRows() {
+        return rows;
     }
 
-    private void initTotalPage() {
-        totalPage = (total % rows) == 0 ? (total / rows) : ((total / rows) + 1);
-        if (page > totalPage) {
-            page = (int) totalPage;
+    public void setRows(int rows) {
+        // 设置个最大记录数，限制单页记录过多
+        if (rows > 10000) {
+            rows = 10000;
         }
-
-        if (page < 1) {
-            page = 1;
-        }
+        this.rows = rows;
+        this.initTotalPage();
     }
 
     public int getStep() {
@@ -91,34 +86,45 @@ public class Paginator {
         this.query = query;
     }
 
-    public int getPage() {
-        return 0;
-    }
-
-    public int getRows() {
-        return 0;
-    }
-
-    public String getHtml() {
-        if (query != null) {
-            final String[] params = {""};
-            String[] querys = query.split("&");
-            Arrays.stream(querys).forEach(s -> {
-                if (s.startsWith(param)) {
-                    return;
-                }
-
-                if (s.equals("")) {
-                    params[0] = s;
-                } else {
-                    params[0] += "&" + s;
-                }
-            });
-            if (!params.equals("")) {
-                url += "?" + params;
-            }
+    /**
+     * 初始化分页信息
+     */
+    public void initTotalPage() {
+        totalPage = (total % rows) == 0 ? (total / rows) : ((total / rows) + 1);
+        if (page > totalPage) {
+            page = (int) totalPage;
         }
+        if (page < 1) {
+            page = 1;
+        }
+    }
 
+    /**
+     * 生成简单的分页页面内容
+     *
+     * @return
+     */
+    public String getHtml() {
+        // 根据request获取当前url，包括参数，如果有已存在名称未paramname的参数，剔除掉，后面会追加新的参数
+        //String contextPath = request.getContextPath();
+        //String requestURI = request.getRequestURI();
+        //String url = contextPath + requestURI;
+        //String url = request.getRequestURI();
+        //String query = request.getQueryString();
+        if (query != null) {
+            String params = "";
+            String[] querys = query.split("&");
+            for (int i = 0; i < querys.length; i++) {
+                if (querys[i].startsWith(param))
+                    continue;
+                if (params.equals(""))
+                    params += querys[i];
+                else
+                    params += "&" + querys[i];
+            }
+            if (!params.equals(""))
+                url += "?" + params;
+        }
         // 结果html
         String pages = "";
 
@@ -143,8 +149,8 @@ public class Paginator {
                         "<a class=\"prev\" href=\"" + url + "?" + param + "=" + (page - 1) + "\">上一页</a>\n");
             }
         } else {
-            // 特定需求可隐藏
-            pages = pages.concat("<a class=\"prev\" href=\"javascript:;\" style=\"color:#ccc\">上一页</a>\n");
+            // pages =
+            // pages.concat("<a class=\"prev\" href=\"javascript:;\" style=\"color:#ccc\">上一页</a>\n");
         }
         // 如果总页数大于要显示的个数，则拼接显示
         if (pageCount > step) {
@@ -164,7 +170,7 @@ public class Paginator {
             // 当前页数右侧还有未显示页码时
             if (pageCount - page >= page - listBegin) {
                 for (int i = listBegin; i < (listBegin + step); i++) {
-                    pages = PageUtil.computePages(pages, i, page, url, param);
+                    pages = handlePages(pages, i, page, url, param);
                 }
                 // 显示最后1页
                 if (listBegin + step <= pageCount) {
@@ -178,12 +184,12 @@ public class Paginator {
                 }
             } else { // 显示最后剩余的几个页码
                 for (int i = (pageCount - step) + 1; i <= pageCount; i++) {
-                    pages = PageUtil.computePages(pages, i, page, url, param);
+                    pages = handlePages(pages, i, page, url, param);
                 }
             }
         } else { // 总页数小于等于step时，直接显示
             for (int i = 1; i <= pageCount; i++) {
-                pages = PageUtil.computePages(pages, i, page, url, param);
+                pages = handlePages(pages, i, page, url, param);
             }
         }
         // 显示下一页
@@ -196,9 +202,13 @@ public class Paginator {
                         "<a class=\"next\" href=\"" + url + "?" + param + "=" + (page + 1) + "\">下一页</a>\n");
             }
         } else {
-            // 特定需求可隐藏
-            pages = pages.concat("<a class=\"next\" href=\"javascript:;\" style=\"color:#ccc\">下一页</a>\n");
+            // pages =
+            // pages.concat("<a class=\"next\" href=\"javascript:;\" style=\"color:#ccc\">下一页</a>\n");
         }
         return pages;
+    }
+
+    private String handlePages(String pages, int i, int page, String url, String param) {
+        return PageUtil.computePages(pages, i, page, url, param);
     }
 }
