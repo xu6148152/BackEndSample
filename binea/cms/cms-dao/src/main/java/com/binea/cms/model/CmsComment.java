@@ -24,6 +24,8 @@ public class CmsComment {
 
     private String content;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getCommentId() {
         return commentId;
     }
@@ -94,5 +96,20 @@ public class CmsComment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsComment{" +
+                "commentId=" + commentId +
+                ", pid=" + pid +
+                ", articleId=" + articleId +
+                ", userId=" + userId +
+                ", status=" + status +
+                ", ip='" + ip + '\'' +
+                ", agent='" + agent + '\'' +
+                ", ctime=" + ctime +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

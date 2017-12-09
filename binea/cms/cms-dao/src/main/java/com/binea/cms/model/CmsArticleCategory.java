@@ -12,6 +12,8 @@ public class CmsArticleCategory {
 
     private Integer categoryId;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getArticleCategoryId() {
         return articleCategoryId;
     }
@@ -34,5 +36,14 @@ public class CmsArticleCategory {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsArticleCategory{" +
+                "articleCategoryId=" + articleCategoryId +
+                ", articleId=" + articleId +
+                ", categoryId=" + categoryId +
+                '}';
     }
 }

@@ -40,6 +40,8 @@ public class CmsArticle {
 
     private String content;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getArticleId() {
         return articleId;
     }
@@ -174,5 +176,28 @@ public class CmsArticle {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsArticle{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", fromurl='" + fromurl + '\'' +
+                ", image='" + image + '\'' +
+                ", keywords='" + keywords + '\'' +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                ", allowcomments=" + allowcomments +
+                ", status=" + status +
+                ", userId=" + userId +
+                ", up=" + up +
+                ", down=" + down +
+                ", readnumber=" + readnumber +
+                ", ctime=" + ctime +
+                ", orders=" + orders +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

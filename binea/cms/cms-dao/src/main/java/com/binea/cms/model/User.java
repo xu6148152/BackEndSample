@@ -21,6 +21,8 @@ public class User {
 
     private String content;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getId() {
         return id;
     }
@@ -75,5 +77,18 @@ public class User {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex=" + sex +
+                ", ctime=" + ctime +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

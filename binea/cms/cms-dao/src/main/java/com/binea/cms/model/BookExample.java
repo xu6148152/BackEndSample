@@ -14,7 +14,31 @@ public class BookExample {
 
     protected boolean distinct;
 
+    private Integer limit;
+
+    private Integer offset;
+
     protected List<Criteria> oredCriteria;
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public void setOredCriteria(List<Criteria> oredCriteria) {
+        this.oredCriteria = oredCriteria;
+    }
 
     public BookExample() {
         oredCriteria = new ArrayList<>();

@@ -6,11 +6,14 @@ package com.binea.cms.model;
  * TIME: 10:11 PM
  */
 public class Book {
+
     private Integer id;
 
     private Integer userid;
 
     private String name;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -34,5 +37,14 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", userid=" + userid +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

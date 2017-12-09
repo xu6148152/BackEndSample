@@ -26,6 +26,8 @@ public class CmsCategory {
 
     private Long orders;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -104,5 +106,21 @@ public class CmsCategory {
 
     public void setOrders(Long orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsCategory{" +
+                "categoryId=" + categoryId +
+                ", pid=" + pid +
+                ", level=" + level +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", type=" + type +
+                ", alias='" + alias + '\'' +
+                ", ctime=" + ctime +
+                ", orders=" + orders +
+                '}';
     }
 }

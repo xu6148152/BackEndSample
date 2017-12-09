@@ -81,7 +81,7 @@
                     <contextPath>/cms-web</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                     <connectors>
-                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>8088</port>
                         </connector>
                     </connectors>

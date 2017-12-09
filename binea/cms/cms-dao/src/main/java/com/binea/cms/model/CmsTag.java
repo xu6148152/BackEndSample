@@ -22,6 +22,8 @@ public class CmsTag {
 
     private Long orders;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getTagId() {
         return tagId;
     }
@@ -84,5 +86,19 @@ public class CmsTag {
 
     public void setOrders(Long orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsTag{" +
+                "tagId=" + tagId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", type=" + type +
+                ", alias='" + alias + '\'' +
+                ", ctime=" + ctime +
+                ", orders=" + orders +
+                '}';
     }
 }

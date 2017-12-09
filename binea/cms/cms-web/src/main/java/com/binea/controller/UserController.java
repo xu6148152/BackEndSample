@@ -2,8 +2,8 @@ package com.binea.controller;
 
 import com.binea.cms.model.User;
 import com.binea.cms.model.UserExample;
+import com.binea.common.util.Paginator;
 import com.binea.service.UserService;
-import com.binea.utils.Paginator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +43,7 @@ public class UserController extends BaseController {
 
     /**
      * 首页
+     *
      * @return
      */
     @RequestMapping(value = {"", "index"})
@@ -52,6 +53,7 @@ public class UserController extends BaseController {
 
     /**
      * 列表
+     *
      * @param page
      * @param rows
      * @param request
@@ -61,41 +63,33 @@ public class UserController extends BaseController {
     public String list(
             @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "20") int rows,
-            HttpServletRequest request) {
-        // 查询参数
-        String clumns = " * ";
-        String condition = " id>0 ";
-        String order = " id asc ";
-        Map<String,Object> parameters = new HashMap<String, Object>();
-        parameters.put("clumns", clumns);
-        parameters.put("condition", condition);
-        parameters.put("order", order);
-        // 创建分页对象
+            HttpServletRequest request, Model model) {
         UserExample userExample = new UserExample();
-        userExample.createCriteria()
-                .andIdGreaterThan(0);
+        userExample.createCriteria().andIdGreaterThan(0);
+
+        userExample.setOffset((page - 1) * rows);
+        userExample.setLimit(rows);
+        userExample.setDistinct(false);
+        userExample.setOrderByClause(" id desc ");
+        List<User> users = userService.getMapper().selectByExample(userExample);
+        model.addAttribute("users", users);
+
+        // 创建分页对象
         long total = userService.getMapper().countByExample(userExample);
         Paginator paginator = new Paginator();
         paginator.setTotal(total);
-        paginator.setPage(page);
-        paginator.setRows(rows);
+
         paginator.setParam("page");
         paginator.setUrl(request.getRequestURI());
         paginator.setQuery(request.getQueryString());
-        // 调用有分页功能的方法
-        parameters.put("paginator", paginator);
-        List<User> users = userService.selectAll(parameters);
-        // 返回数据
-        request.setAttribute("users", users);
-        request.setAttribute("paginator", paginator);
 
-
-        //PageHelper.startPage(1, 10);
+        model.addAttribute("paginator", paginator);
         return "/user/list";
     }
 
     /**
      * 新增get
+     *
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -105,6 +99,7 @@ public class UserController extends BaseController {
 
     /**
      * 新增post
+     *
      * @param user
      * @param binding
      * @return
@@ -124,6 +119,7 @@ public class UserController extends BaseController {
 
     /**
      * 新增post2,返回自增主键值
+     *
      * @param user
      * @param binding
      * @return
@@ -141,10 +137,11 @@ public class UserController extends BaseController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable int id) {
         userService.getMapper().deleteByPrimaryKey(id);
         return "redirect:/user/list";
@@ -152,6 +149,7 @@ public class UserController extends BaseController {
 
     /**
      * 修改get
+     *
      * @param id
      * @param model
      * @return
@@ -164,6 +162,7 @@ public class UserController extends BaseController {
 
     /**
      * 修改post
+     *
      * @param id
      * @param user
      * @param binding
@@ -182,6 +181,7 @@ public class UserController extends BaseController {
 
     /**
      * 上传文件
+     *
      * @param file
      * @param request
      * @return
@@ -221,6 +221,7 @@ public class UserController extends BaseController {
 
     /**
      * ajax
+     *
      * @param id
      * @return
      */

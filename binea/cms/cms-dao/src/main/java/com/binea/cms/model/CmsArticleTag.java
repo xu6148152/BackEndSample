@@ -12,6 +12,8 @@ public class CmsArticleTag {
 
     private Integer tagId;
 
+    private static final long serialVersionUID = 1L;
+
     public Integer getArticleTagId() {
         return articleTagId;
     }
@@ -34,5 +36,14 @@ public class CmsArticleTag {
 
     public void setTagId(Integer tagId) {
         this.tagId = tagId;
+    }
+
+    @Override
+    public String toString() {
+        return "CmsArticleTag{" +
+                "articleTagId=" + articleTagId +
+                ", articleId=" + articleId +
+                ", tagId=" + tagId +
+                '}';
     }
 }

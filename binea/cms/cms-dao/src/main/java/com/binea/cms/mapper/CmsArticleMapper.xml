@@ -119,6 +119,14 @@
         <if test="orderByClause != null">
             order by ${orderByClause}
         </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from cms_article
@@ -203,52 +211,52 @@
             <if test="articleId != null">
                 #{articleId,jdbcType=INTEGER},
             </if>
-            <if test="title != null" >
+            <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="author != null" >
+            <if test="author != null">
                 #{author,jdbcType=VARCHAR},
             </if>
-            <if test="fromurl != null" >
+            <if test="fromurl != null">
                 #{fromurl,jdbcType=VARCHAR},
             </if>
-            <if test="image != null" >
+            <if test="image != null">
                 #{image,jdbcType=VARCHAR},
             </if>
-            <if test="keywords != null" >
+            <if test="keywords != null">
                 #{keywords,jdbcType=VARCHAR},
             </if>
-            <if test="description != null" >
+            <if test="description != null">
                 #{description,jdbcType=VARCHAR},
             </if>
-            <if test="type != null" >
+            <if test="type != null">
                 #{type,jdbcType=TINYINT},
             </if>
-            <if test="allowcomments != null" >
+            <if test="allowcomments != null">
                 #{allowcomments,jdbcType=TINYINT},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 #{status,jdbcType=TINYINT},
             </if>
-            <if test="userId != null" >
+            <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
             </if>
-            <if test="up != null" >
+            <if test="up != null">
                 #{up,jdbcType=INTEGER},
             </if>
-            <if test="down != null" >
+            <if test="down != null">
                 #{down,jdbcType=INTEGER},
             </if>
-            <if test="readnumber != null" >
+            <if test="readnumber != null">
                 #{readnumber,jdbcType=INTEGER},
             </if>
-            <if test="ctime != null" >
+            <if test="ctime != null">
                 #{ctime,jdbcType=BIGINT},
             </if>
-            <if test="orders != null" >
+            <if test="orders != null">
                 #{orders,jdbcType=BIGINT},
             </if>
-            <if test="content != null" >
+            <if test="content != null">
                 #{content,jdbcType=LONGVARCHAR},
             </if>
         </trim>
@@ -265,52 +273,52 @@
             <if test="record.articleId != null">
                 article_id = #{record.articleId,jdbcType=INTEGER},
             </if>
-            <if test="record.title != null" >
+            <if test="record.title != null">
                 title = #{record.title,jdbcType=VARCHAR},
             </if>
-            <if test="record.author != null" >
+            <if test="record.author != null">
                 author = #{record.author,jdbcType=VARCHAR},
             </if>
-            <if test="record.fromurl != null" >
+            <if test="record.fromurl != null">
                 fromurl = #{record.fromurl,jdbcType=VARCHAR},
             </if>
-            <if test="record.image != null" >
+            <if test="record.image != null">
                 image = #{record.image,jdbcType=VARCHAR},
             </if>
-            <if test="record.keywords != null" >
+            <if test="record.keywords != null">
                 keywords = #{record.keywords,jdbcType=VARCHAR},
             </if>
-            <if test="record.description != null" >
+            <if test="record.description != null">
                 description = #{record.description,jdbcType=VARCHAR},
             </if>
-            <if test="record.type != null" >
+            <if test="record.type != null">
                 type = #{record.type,jdbcType=TINYINT},
             </if>
-            <if test="record.allowcomments != null" >
+            <if test="record.allowcomments != null">
                 allowcomments = #{record.allowcomments,jdbcType=TINYINT},
             </if>
-            <if test="record.status != null" >
+            <if test="record.status != null">
                 status = #{record.status,jdbcType=TINYINT},
             </if>
-            <if test="record.userId != null" >
+            <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=INTEGER},
             </if>
-            <if test="record.up != null" >
+            <if test="record.up != null">
                 up = #{record.up,jdbcType=INTEGER},
             </if>
-            <if test="record.down != null" >
+            <if test="record.down != null">
                 down = #{record.down,jdbcType=INTEGER},
             </if>
-            <if test="record.readnumber != null" >
+            <if test="record.readnumber != null">
                 readnumber = #{record.readnumber,jdbcType=INTEGER},
             </if>
-            <if test="record.ctime != null" >
+            <if test="record.ctime != null">
                 ctime = #{record.ctime,jdbcType=BIGINT},
             </if>
-            <if test="record.orders != null" >
+            <if test="record.orders != null">
                 orders = #{record.orders,jdbcType=BIGINT},
             </if>
-            <if test="record.content != null" >
+            <if test="record.content != null">
                 content = #{record.content,jdbcType=LONGVARCHAR},
             </if>
         </set>
@@ -348,7 +356,7 @@
         from cms_article
         where article_id = #{articleId,jdbcType=INTEGER}
     </select>
-    <update id="updateByExampleWithBLOBs" parameterType="map" >
+    <update id="updateByExampleWithBLOBs" parameterType="map">
         update cms_article
         set article_id = #{record.articleId,jdbcType=INTEGER},
         title = #{record.title,jdbcType=VARCHAR},
@@ -367,65 +375,65 @@
         ctime = #{record.ctime,jdbcType=BIGINT},
         orders = #{record.orders,jdbcType=BIGINT},
         content = #{record.content,jdbcType=LONGVARCHAR}
-        <if test="_parameter != null" >
-            <include refid="Update_By_Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.CmsArticle" >
-    update cms_article
-    <set >
-    <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-    </if>
-    <if test="author != null" >
-        author = #{author,jdbcType=VARCHAR},
-    </if>
-    <if test="fromurl != null" >
-        fromurl = #{fromurl,jdbcType=VARCHAR},
-    </if>
-    <if test="image != null" >
-        image = #{image,jdbcType=VARCHAR},
-    </if>
-    <if test="keywords != null" >
-        keywords = #{keywords,jdbcType=VARCHAR},
-    </if>
-    <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-    </if>
-    <if test="type != null" >
-        type = #{type,jdbcType=TINYINT},
-    </if>
-    <if test="allowcomments != null" >
-        allowcomments = #{allowcomments,jdbcType=TINYINT},
-    </if>
-    <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-    </if>
-    <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-    </if>
-    <if test="up != null" >
-        up = #{up,jdbcType=INTEGER},
-    </if>
-        <if test="down != null" >
-            down = #{down,jdbcType=INTEGER},
-        </if>
-        <if test="readnumber != null" >
-            readnumber = #{readnumber,jdbcType=INTEGER},
-        </if>
-        <if test="ctime != null" >
-            ctime = #{ctime,jdbcType=BIGINT},
-        </if>
-        <if test="orders != null" >
-            orders = #{orders,jdbcType=BIGINT},
-        </if>
-        <if test="content != null" >
-            content = #{content,jdbcType=LONGVARCHAR},
-        </if>
-    </set>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.CmsArticle">
+        update cms_article
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="fromurl != null">
+                fromurl = #{fromurl,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="allowcomments != null">
+                allowcomments = #{allowcomments,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="up != null">
+                up = #{up,jdbcType=INTEGER},
+            </if>
+            <if test="down != null">
+                down = #{down,jdbcType=INTEGER},
+            </if>
+            <if test="readnumber != null">
+                readnumber = #{readnumber,jdbcType=INTEGER},
+            </if>
+            <if test="ctime != null">
+                ctime = #{ctime,jdbcType=BIGINT},
+            </if>
+            <if test="orders != null">
+                orders = #{orders,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
         where article_id = #{articleId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.cms.model.CmsArticle" >
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.cms.model.CmsArticle">
         update cms_article
         set title = #{title,jdbcType=VARCHAR},
         author = #{author,jdbcType=VARCHAR},
@@ -445,7 +453,7 @@
         content = #{content,jdbcType=LONGVARCHAR}
         where article_id = #{articleId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.CmsArticle" >
+    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.CmsArticle">
         update cms_article
         set title = #{title,jdbcType=VARCHAR},
         author = #{author,jdbcType=VARCHAR},
