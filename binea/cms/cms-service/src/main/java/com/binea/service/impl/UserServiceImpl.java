@@ -45,23 +45,4 @@ public class UserServiceImpl implements UserService {
     public UserVO selectUserWithBook(int id) {
         return userVOMapper.selectUserWithBook(id);
     }
-
-    /**
-     * 根据条件获取用户列表
-     *
-     * @param map
-     * @return
-     */
-    public List<User> selectAll(Map<String, Object> map) {
-        return userVOMapper.selectAll(map);
-    }
-
-    /**
-     * 插入用户并返回主键
-     *
-     * @param user
-     */
-    public void insertAutoKey(User user) {
-        userVOMapper.insertAutoKey(user);
-    }
 }

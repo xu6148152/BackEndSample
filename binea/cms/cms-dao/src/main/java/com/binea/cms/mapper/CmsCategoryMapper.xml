@@ -109,21 +109,22 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.binea.cms.model.CmsCategory">
-        insert into cms_category (category_id, pid, level,
-        name, description, icon,
-        type, alias, ctime,
-        orders)
-        values (#{categoryId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{level,jdbcType=TINYINT},
-        #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
-        #{type,jdbcType=TINYINT}, #{alias,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT},
-        #{orders,jdbcType=BIGINT})
+        <selectKey resultType="java.lang.Integer" keyProperty="categoryId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into cms_category (pid, level, name,
+        description, icon, type,
+        alias, ctime, orders)
+        values (#{pid,jdbcType=INTEGER}, #{level,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT},
+        #{alias,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{orders,jdbcType=BIGINT})
     </insert>
     <insert id="insertSelective" parameterType="com.binea.cms.model.CmsCategory">
+        <selectKey resultType="java.lang.Integer" keyProperty="categoryId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into cms_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="categoryId != null">
-                category_id,
-            </if>
             <if test="pid != null">
                 pid,
             </if>
@@ -153,9 +154,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="categoryId != null">
-                #{categoryId,jdbcType=INTEGER},
-            </if>
             <if test="pid != null">
                 #{pid,jdbcType=INTEGER},
             </if>

@@ -1,11 +1,7 @@
 package com.binea.service;
 
 import com.binea.cms.mapper.UserMapper;
-import com.binea.cms.model.User;
 import com.binea.model.UserVO;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by binea
@@ -21,20 +17,4 @@ public interface UserService extends BaseService<UserMapper> {
      * @return
      */
     UserVO selectUserWithBook(int id);
-
-    /**
-     * 根据条件获取用户列表
-     *
-     * @param map
-     * @return
-     */
-    List<User> selectAll(Map<String, Object> map);
-
-    /**
-     * 插入用户并返回主键
-     *
-     * @param user
-     */
-    void insertAutoKey(User user);
-
 }

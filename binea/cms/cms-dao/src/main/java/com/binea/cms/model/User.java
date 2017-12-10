@@ -1,25 +1,23 @@
 package com.binea.cms.model;
 
-/**
- * Created by binea
- * Date: 29/11/2017
- * TIME: 10:13 PM
- */
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable {
     private Integer id;
 
-    private String username;
+    private String name;
 
-    private String password;
+    private Integer age;
 
-    private String nickname;
+    private long ctime;
 
-    private Integer sex;
+    public long getCtime() {
+        return ctime;
+    }
 
-    private Long ctime;
-
-    private String content;
+    public void setCtime(long ctime) {
+        this.ctime = ctime;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -31,64 +29,32 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public Long getCtime() {
-        return ctime;
-    }
-
-    public void setCtime(Long ctime) {
-        this.ctime = ctime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", sex=" + sex +
-                ", ctime=" + ctime +
-                ", content='" + content + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", age=").append(age);
+        sb.append("]");
+        return sb.toString();
     }
 }
