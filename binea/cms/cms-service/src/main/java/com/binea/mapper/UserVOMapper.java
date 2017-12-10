@@ -1,7 +1,7 @@
 package com.binea.mapper;
 
-import com.binea.cms.mapper.UserMapper;
-import com.binea.cms.model.User;
+import com.binea.cms.dao.mapper.UserMapper;
+import com.binea.cms.dao.model.User;
 import com.binea.model.UserVO;
 import org.springframework.stereotype.Repository;
 

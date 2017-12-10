@@ -1,6 +1,6 @@
 package com.binea.controller;
 
-import com.binea.cms.model.User;
+import com.binea.cms.dao.model.User;
 import com.binea.service.impl.UserServiceImpl;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
