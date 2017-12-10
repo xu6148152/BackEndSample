@@ -108,14 +108,14 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.binea.cms.dao.model.Book">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into book (userid, name)
         values (#{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.binea.cms.dao.model.Book">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into book
@@ -365,4 +365,5 @@
         name = #{name,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <cache eviction="LRU" flushInterval="60000" readOnly="true" size="1024"/>
 </mapper>
