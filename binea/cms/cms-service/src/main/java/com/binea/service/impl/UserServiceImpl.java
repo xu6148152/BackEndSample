@@ -5,6 +5,7 @@ import com.binea.mapper.UserVOMapper;
 import com.binea.model.UserVO;
 import com.binea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,8 @@ public class UserServiceImpl implements UserService {
      * @param id
      * @return
      */
+    @Override
+    @Cacheable(value = "ehcache")
     public UserVO selectUserWithBook(int id) {
         return userVOMapper.selectUserWithBook(id);
     }

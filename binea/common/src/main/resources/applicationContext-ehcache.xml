@@ -17,6 +17,7 @@
     <!-- 默认是cacheManager -->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
         <property name="cacheManager" ref="cacheManagerFactory"/>
+        <property name="shared" value="true"/>
     </bean>
 
 </beans>
