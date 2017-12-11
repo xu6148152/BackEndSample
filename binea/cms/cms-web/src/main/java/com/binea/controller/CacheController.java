@@ -1,8 +1,10 @@
 package com.binea.controller;
 
 import com.binea.common.util.EhCacheUtil;
+import com.binea.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,9 @@ public class CacheController {
     private final static String CACHE_NAME = "ehcache_common";
 
     private final static String SUCCESS = "success";
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/add")
     @ResponseBody
@@ -50,5 +55,12 @@ public class CacheController {
             return "value";
         }
         return object;
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public Object test(HttpServletRequest request) {
+        logger.info("tmpdir: {}", System.getProperty("java.io.tmpdir"));
+        return "success";
     }
 }
