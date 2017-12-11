@@ -1,7 +1,7 @@
 package com.binea;
 
 import com.binea.cms.dao.model.User;
-import com.binea.model.UserVO;
+import com.binea.cms.dao.model.UserVO;
 import com.binea.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 package com.binea.service;
 
 import com.binea.cms.dao.mapper.UserMapper;
-import com.binea.model.UserVO;
+import com.binea.cms.dao.model.UserVO;
 
 /**
  * Created by binea

@@ -20,6 +20,7 @@
 </div>
 <div id="main">
     <form id="form" method="post">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <table border="1">
             <caption>修改用户</caption>
             <tr>

@@ -1,7 +1,4 @@
-package com.binea.model;
-
-import com.binea.cms.dao.model.Book;
-import com.binea.cms.dao.model.User;
+package com.binea.cms.dao.model;
 
 import java.util.List;
 
