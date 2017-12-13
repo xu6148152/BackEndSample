@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>binea</artifactId>
+        <artifactId>oss</artifactId>
         <groupId>com.binea</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>binea-oss-web</artifactId>
+    <artifactId>oss-web</artifactId>
     <packaging>war</packaging>
 
     <name>oss-web Maven Webapp</name>
@@ -34,7 +34,7 @@
         <!-- service -->
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-oss-sdk</artifactId>
+            <artifactId>oss-sdk</artifactId>
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
