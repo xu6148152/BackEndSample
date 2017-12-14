@@ -1,4 +1,4 @@
-package java.com.binea.upms.service;
+package com.binea.upms.service;
 
 /**
  * Created by binea
