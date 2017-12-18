@@ -3,7 +3,7 @@ package com.binea.controller;
 import com.binea.cms.dao.model.User;
 import com.binea.cms.dao.model.UserExample;
 import com.binea.common.util.Paginator;
-import com.binea.service.UserService;
+import com.binea.cms.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

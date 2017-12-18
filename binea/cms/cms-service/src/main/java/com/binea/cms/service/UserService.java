@@ -1,4 +1,4 @@
-package com.binea.service;
+package com.binea.cms.service;
 
 import com.binea.cms.dao.mapper.UserMapper;
 import com.binea.cms.dao.model.UserVO;

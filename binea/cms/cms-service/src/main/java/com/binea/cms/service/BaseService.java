@@ -1,4 +1,4 @@
-package com.binea.service;
+package com.binea.cms.service;
 
 /**
  * Created by binea

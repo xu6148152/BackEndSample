@@ -1,9 +1,9 @@
-package com.binea.service.impl;
+package com.binea.cms.service.impl;
 
 import com.binea.cms.dao.mapper.UserMapper;
 import com.binea.mapper.UserVOMapper;
 import com.binea.cms.dao.model.UserVO;
-import com.binea.service.UserService;
+import com.binea.cms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

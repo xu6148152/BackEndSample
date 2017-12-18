@@ -2,7 +2,7 @@ package com.binea;
 
 import com.binea.cms.dao.model.User;
 import com.binea.cms.dao.model.UserVO;
-import com.binea.service.UserService;
+import com.binea.cms.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
