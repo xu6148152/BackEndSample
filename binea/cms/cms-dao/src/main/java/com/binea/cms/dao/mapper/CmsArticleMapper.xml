@@ -19,7 +19,7 @@
         <result column="ctime" property="ctime" jdbcType="BIGINT"/>
         <result column="orders" property="orders" jdbcType="BIGINT"/>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.zheng.cms.model.CmsArticle" extends="BaseResultMap">
+    <resultMap id="ResultMapWithBLOBs" type="com.binea.cms.dao.model.CmsArticle" extends="BaseResultMap">
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -90,7 +90,7 @@
         content
     </sql>
     <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
-            parameterType="com.zheng.cms.model.CmsArticleExample">
+            parameterType="com.binea.cms.dao.model.CmsArticleExample">
         select
         <if test="distinct">
             distinct
@@ -379,7 +379,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.CmsArticle">
+    <update id="updateByPrimaryKeySelective" parameterType="com.binea.cms.dao.model.CmsArticle">
         update cms_article
         <set>
             <if test="title != null">
@@ -433,7 +433,7 @@
         </set>
         where article_id = #{articleId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.cms.model.CmsArticle">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.binea.cms.dao.model.CmsArticle">
         update cms_article
         set title = #{title,jdbcType=VARCHAR},
         author = #{author,jdbcType=VARCHAR},
@@ -453,7 +453,7 @@
         content = #{content,jdbcType=LONGVARCHAR}
         where article_id = #{articleId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.CmsArticle">
+    <update id="updateByPrimaryKey" parameterType="com.binea.cms.dao.model.CmsArticle">
         update cms_article
         set title = #{title,jdbcType=VARCHAR},
         author = #{author,jdbcType=VARCHAR},

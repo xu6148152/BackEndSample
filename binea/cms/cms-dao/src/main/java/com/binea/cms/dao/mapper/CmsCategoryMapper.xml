@@ -249,7 +249,7 @@
         from cms_category
         where category_id = #{categoryId,jdbcType=INTEGER}
     </select>
-    <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cms.model.CmsCategory">
+    <update id="updateByPrimaryKeySelective" parameterType="com.binea.cms.dao.model.CmsCategory">
         update cms_category
         <set>
             <if test="pid != null">
@@ -282,7 +282,7 @@
         </set>
         where category_id = #{categoryId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zheng.cms.model.CmsCategory">
+    <update id="updateByPrimaryKey" parameterType="com.binea.cms.dao.model.CmsCategory">
         update cms_category
         set pid = #{pid,jdbcType=INTEGER},
         level = #{level,jdbcType=TINYINT},
