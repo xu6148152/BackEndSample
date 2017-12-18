@@ -1,5 +1,7 @@
 package com.binea.common.util;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by binea
  * Date: 9/12/2017
@@ -15,6 +17,17 @@ public class Paginator {
     private String param = "page";        // 分页参数名称，用于支持一个页面多个分页功能
     private String url = "";            // 项目路径
     private String query = "";            // 当前页所有参数
+
+    public Paginator() {
+    }
+
+    public Paginator(long total, int page, int rows, HttpServletRequest request) {
+        setTotal(total);
+        setPage(page);
+        setRows(rows);
+        setUrl(request.getRequestURI());
+        setQuery(request.getQueryString());
+    }
 
     public long getTotal() {
         return total;

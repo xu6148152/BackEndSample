@@ -315,9 +315,6 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.binea.cms.dao.model.User">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
         insert into user (username, password, nickname,
         sex, ctime, content
         )
@@ -326,9 +323,6 @@
         )
     </insert>
     <insert id="insertSelective" parameterType="com.binea.cms.dao.model.User">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="username != null">

@@ -25,7 +25,7 @@ import java.util.Map;
  * Date: 30/11/2017
  * TIME: 10:18 PM
  */
-@Controller
+@RestController
 @RequestMapping("/hello")
 public class HelloController {
 

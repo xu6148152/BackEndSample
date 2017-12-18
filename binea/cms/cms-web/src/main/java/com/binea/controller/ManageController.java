@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: 10/12/2017
  * TIME: 4:26 PM
  */
-@Controller
+@RestController
 @RequestMapping("/manage")
 public class ManageController {
 

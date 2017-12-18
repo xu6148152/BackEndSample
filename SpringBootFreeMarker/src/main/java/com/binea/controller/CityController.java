@@ -16,7 +16,7 @@ import java.util.List;
  * Date: 29/10/2017
  * TIME: 3:45 PM
  */
-@Controller
+@RestController
 public class CityController {
 
     @Autowired

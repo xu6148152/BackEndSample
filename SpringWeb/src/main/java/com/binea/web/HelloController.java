@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Date: 4/11/2017
  * TIME: 4:53 PM
  */
-@Controller
+@RestController
 public class HelloController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

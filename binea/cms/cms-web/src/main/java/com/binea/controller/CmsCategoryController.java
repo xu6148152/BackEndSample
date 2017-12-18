@@ -1,8 +1,8 @@
 package com.binea.controller;
 
-import com.binea.cms.dao.model.CmsArticle;
-import com.binea.cms.dao.model.CmsArticleExample;
-import com.binea.cms.service.CmsArticleService;
+import com.binea.cms.dao.model.CmsCategory;
+import com.binea.cms.dao.model.CmsCategoryExample;
+import com.binea.cms.service.CmsCategoryService;
 import com.binea.common.util.Paginator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,26 +21,29 @@ import java.util.List;
  * Date: 18/12/2017
  * TIME: 10:11 PM
  */
-@RestController
-@RequestMapping("/article")
-public class CmsArticleController extends BaseController {
 
-    private final static Logger _log = LoggerFactory.getLogger(CmsArticleController.class);
+@RestController
+@RequestMapping("/category")
+public class CmsCategoryController extends BaseController {
+
+    private final static Logger _log = LoggerFactory.getLogger(CmsCategoryController.class);
 
     @Autowired
-    private CmsArticleService cmsArticleService;
+    private CmsCategoryService cmsCategoryService;
 
     /**
      * 首页
+     *
      * @return
      */
     @RequestMapping("")
     public String index() {
-        return "redirect:/article/list";
+        return "redirect:/category/list";
     }
 
     /**
      * 列表
+     *
      * @param page
      * @param rows
      * @param request
@@ -53,89 +56,94 @@ public class CmsArticleController extends BaseController {
             HttpServletRequest request, Model model) {
 
         // 数据列表
-        CmsArticleExample cmsArticleExample = new CmsArticleExample();
-        cmsArticleExample.setOffset((page - 1) * rows);
-        cmsArticleExample.setLimit(rows);
-        cmsArticleExample.setOrderByClause("articleId desc");
-        List<CmsArticle> articles = cmsArticleService.getMapper().selectByExample(cmsArticleExample);
+        CmsCategoryExample cmsCategoryExample = new CmsCategoryExample();
+        cmsCategoryExample.setOffset((page - 1) * rows);
+        cmsCategoryExample.setLimit(rows);
+        cmsCategoryExample.setOrderByClause("categoryId desc");
+        List<CmsCategory> categorys = cmsCategoryService.getMapper().selectByExample(cmsCategoryExample);
 
         // 分页对象
-        long total = cmsArticleService.getMapper().countByExample(cmsArticleExample);
+        long total = cmsCategoryService.getMapper().countByExample(cmsCategoryExample);
         Paginator paginator = new Paginator(total, page, rows, request);
 
-        model.addAttribute("articles", articles);
+        model.addAttribute("categorys", categorys);
         model.addAttribute("paginator", paginator);
-        return "/article/list";
+        return "/category/list";
     }
 
     /**
      * 新增get
+     *
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add() {
-        return "/article/add";
+        return "/category/add";
     }
 
     /**
      * 新增post
-     * @param cmsArticle
+     *
+     * @param cmsCategory
      * @param binding
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@Valid CmsArticle cmsArticle, BindingResult binding) {
+    public String add(@Valid CmsCategory cmsCategory, BindingResult binding) {
         if (binding.hasErrors()) {
             for (ObjectError error : binding.getAllErrors()) {
                 _log.error(error.getDefaultMessage());
             }
-            return "/article/add";
+            return "/category/add";
         }
-        cmsArticle.setCtime(System.currentTimeMillis());
-        cmsArticleService.getMapper().insertSelective(cmsArticle);
-        _log.info("新增记录id为：{}", cmsArticle.getArticleId());
-        return "redirect:/article/list";
+        cmsCategory.setCtime(System.currentTimeMillis());
+        cmsCategoryService.getMapper().insertSelective(cmsCategory);
+        _log.info("新增记录id为：{}", cmsCategory.getCategoryId());
+        return "redirect:/category/list";
     }
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") int id) {
-        cmsArticleService.getMapper().deleteByPrimaryKey(id);
-        return "redirect:/article/list";
+        cmsCategoryService.getMapper().deleteByPrimaryKey(id);
+        return "redirect:/category/list";
     }
 
     /**
      * 修改get
+     *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable("id") int id, Model model) {
-        model.addAttribute("article", cmsArticleService.getMapper().selectByPrimaryKey(id));
-        return "/article/update";
+        model.addAttribute("category", cmsCategoryService.getMapper().selectByPrimaryKey(id));
+        return "/category/update";
     }
 
     /**
      * 修改post
+     *
      * @param id
-     * @param cmsArticle
+     * @param cmsCategory
      * @param binding
      * @param model
      * @return
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable("id") int id, @Valid CmsArticle cmsArticle, BindingResult binding, Model model) {
+    public String update(@PathVariable("id") int id, @Valid CmsCategory cmsCategory, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
             model.addAttribute("errors", binding.getAllErrors());
-            return "/article/update/" + id;
+            return "/category/update/" + id;
         }
-        cmsArticleService.getMapper().updateByPrimaryKeySelective(cmsArticle);
-        return "redirect:/article/list";
+        cmsCategoryService.getMapper().updateByPrimaryKeySelective(cmsCategory);
+        return "redirect:/category/list";
     }
 
 }

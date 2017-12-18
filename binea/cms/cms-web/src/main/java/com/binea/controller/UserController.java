@@ -2,12 +2,11 @@ package com.binea.controller;
 
 import com.binea.cms.dao.model.User;
 import com.binea.cms.dao.model.UserExample;
-import com.binea.common.util.Paginator;
 import com.binea.cms.service.UserService;
+import com.binea.common.util.Paginator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -27,7 +26,7 @@ import java.util.Map;
  * Date: 30/11/2017
  * TIME: 10:19 PM
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
@@ -76,7 +75,7 @@ public class UserController extends BaseController {
 
         // 创建分页对象
         long total = userService.getMapper().countByExample(userExample);
-        Paginator paginator = new Paginator();
+        Paginator paginator = new Paginator(total, page, rows, request);
         paginator.setTotal(total);
 
         paginator.setParam("page");
