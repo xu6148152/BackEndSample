@@ -59,7 +59,7 @@ public class CmsTagController extends BaseController {
         CmsTagExample cmsTagExample = new CmsTagExample();
         cmsTagExample.setOffset((page - 1) * rows);
         cmsTagExample.setLimit(rows);
-        cmsTagExample.setOrderByClause("tagId desc");
+        cmsTagExample.setOrderByClause("orders desc");
         List<CmsTag> tags = cmsTagService.getMapper().selectByExample(cmsTagExample);
 
         // 分页对象
@@ -96,7 +96,9 @@ public class CmsTagController extends BaseController {
             }
             return "/tag/add";
         }
-        cmsTag.setCtime(System.currentTimeMillis());
+        long time = System.currentTimeMillis();
+        cmsTag.setCtime(time);
+        cmsTag.setOrders(time);
         cmsTagService.getMapper().insertSelective(cmsTag);
         _log.info("新增记录id为：{}", cmsTag.getTagId());
         return "redirect:/tag/list";
