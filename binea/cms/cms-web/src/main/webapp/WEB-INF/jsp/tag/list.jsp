@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="basePath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 </div>
 <div>
     <table border="1">
-        <caption><a href="${basePath}/tag/add">新增</a></caption>
+        <caption><a href="${basePath}/tag/add">新增</a> <a href="${basePath}/tag/batchDelete">批量删除</a></caption>
         <thead>
         <tr>
             <th>ID</th>
