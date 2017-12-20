@@ -1,47 +1,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>oss</artifactId>
         <groupId>com.binea</groupId>
+        <artifactId>binea-cms</artifactId>
         <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>oss-web</artifactId>
+
+    <artifactId>binea-cms-job</artifactId>
     <packaging>war</packaging>
 
-    <name>oss-web Maven Webapp</name>
+    <name>binea-cms-job Maven Webapp</name>
 
     <dependencies>
-        <!-- 测试 -->
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-cms-service</artifactId>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
         </dependency>
-        <!-- servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <!-- service -->
-        <dependency>
-            <groupId>com.binea</groupId>
-            <artifactId>oss-sdk</artifactId>
-            <version>1.0.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>8.1.16.v20140903</version>
         </dependency>
     </dependencies>
 
@@ -70,7 +57,7 @@
     </profiles>
 
     <build>
-        <finalName>oss-web</finalName>
+        <finalName>binea-cms-job</finalName>
         <filters>
             <filter>src/main/resources/profiles/${env}.properties</filter>
         </filters>
@@ -83,19 +70,18 @@
         <plugins>
             <!-- jetty插件 -->
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.9.v20130131</version>
+                <!--<version>9.0.0.v20130308</version>-->
+                <version>9.2.7.v20150116</version>
                 <configuration>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/oss-web</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8078</port>
-                        </connector>
-                    </connectors>
+                    <httpConnector>
+                        <port>2223</port>
+                    </httpConnector>
                     <reload>automatic</reload>
                 </configuration>
             </plugin>
@@ -104,9 +90,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <!--是否跳过单元测试-->
                     <skipTests>true</skipTests>
-                    <!--是否忽略单元测试错误-->
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>

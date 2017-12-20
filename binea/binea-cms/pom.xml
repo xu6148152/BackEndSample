@@ -3,25 +3,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.binea</groupId>
-    <artifactId>binea</artifactId>
+    <artifactId>binea-cms</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>binea</name>
+    <name>binea-cms</name>
+    <url></url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
     </properties>
 
     <modules>
-        <module>binea-cms</module>
-        <module>common</module>
-        <module>oss</module>
-        <module>qa</module>
-        <module>upms</module>
+        <module>binea-cms-dao</module>
+        <module>binea-cms-service</module>
+        <module>binea-cms-web</module>
     </modules>
+
 </project>
