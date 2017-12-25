@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RequestMapping("/cache")
 @RestController
-public class CacheController {
+public class CacheController extends BaseController{
     private final static Logger logger = LoggerFactory.getLogger(CacheController.class);
 
     private final static String CACHE_NAME = "ehcache_common";

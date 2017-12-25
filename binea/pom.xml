@@ -19,9 +19,8 @@
 
     <modules>
         <module>binea-cms</module>
-        <module>common</module>
         <module>oss</module>
-        <module>qa</module>
-        <module>upms</module>
+        <module>binea-qa</module>
+        <module>binea-upms</module>
     </modules>
 </project>

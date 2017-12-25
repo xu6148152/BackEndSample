@@ -16,7 +16,8 @@
     <dependencies>
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-cms-service</artifactId>
+            <artifactId>binea-cms-rpc-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -80,7 +81,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>2223</port>
+                        <port>8002</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>

@@ -21,6 +21,10 @@
         <module>binea-cms-dao</module>
         <module>binea-cms-service</module>
         <module>binea-cms-web</module>
+        <module>binea-cms-admin</module>
+        <module>binea-cms-job</module>
+        <module>binea-cms-search</module>
+        <module>binea-cms-rpc-api</module>
     </modules>
 
 </project>

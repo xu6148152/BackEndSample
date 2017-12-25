@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/manage")
-public class ManageController {
+public class ManageController extends BaseController{
 
     private static Logger _log = LoggerFactory.getLogger(ManageController.class);
 
