@@ -1,5 +1,8 @@
 package com.binea.schedule;
 
+import com.taobao.pamirs.schedule.IScheduleTaskDealSingle;
+import com.taobao.pamirs.schedule.TaskItemDefine;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

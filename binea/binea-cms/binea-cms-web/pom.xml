@@ -37,6 +37,22 @@
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
+
+        <!-- tbschedule -->
+        <dependency>
+            <groupId>com.taobao.pamirs.schedule</groupId>
+            <artifactId>tbschedule</artifactId>
+            <version>3.2.8-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/tbschedule-3.2.8-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.3.14.v20161028</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -75,16 +91,12 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
+                <version>9.3.14.v20161028</version>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <configuration>
                     <contextPath>/cms-web</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <connectors>
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8080</port>
-                        </connector>
-                    </connectors>
                     <reload>automatic</reload>
                 </configuration>
             </plugin>
