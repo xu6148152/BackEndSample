@@ -12,7 +12,6 @@
     <packaging>war</packaging>
 
     <name>binea-cms-search Maven Webapp</name>
-    <url>http://www.zhangshuzheng.cn</url>
 
     <dependencies>
         <dependency>
