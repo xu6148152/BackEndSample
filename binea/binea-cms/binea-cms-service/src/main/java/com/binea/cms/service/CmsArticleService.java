@@ -1,6 +1,6 @@
 package com.binea.cms.service;
 
-import com.binea.cms.dao.mapper.CmsArticleMapper;
+import com.binea.pay.dao.mapper.CmsArticleMapper;
 
 /**
  * Created by binea

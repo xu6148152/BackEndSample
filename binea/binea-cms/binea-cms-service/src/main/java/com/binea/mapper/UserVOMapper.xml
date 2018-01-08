@@ -15,7 +15,7 @@
         <result column="sex" property="sex"/>
         <result column="ctime" property="ctime"/>
         <result column="content" property="content" />
-        <collection column="userid" property="books" ofType="com.binea.cms.dao.model.Book">
+        <collection column="userid" property="books" ofType="com.binea.pay.dao.model.Book">
             <id column="b_id" property="id"/>
             <result column="userid" property="userid"/>
             <result column="name" property="name"/>

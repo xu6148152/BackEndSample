@@ -1,5 +1,8 @@
 package com.binea.cms.dao.model;
 
+import com.binea.pay.dao.model.Book;
+import com.binea.pay.dao.model.User;
+
 import java.util.List;
 
 /**

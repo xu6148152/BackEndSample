@@ -1,6 +1,6 @@
 package com.binea.cms.service;
 
-import com.binea.cms.dao.mapper.CmsTagMapper;
+import com.binea.pay.dao.mapper.CmsTagMapper;
 
 /**
  * Created by binea

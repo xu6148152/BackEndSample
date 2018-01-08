@@ -26,7 +26,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="binea-cms-rpc-api" />
-    <orderEntry type="module" module-name="binea-cms-dao" />
+    <orderEntry type="module" module-name="binea-pay-dao" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" level="project" />

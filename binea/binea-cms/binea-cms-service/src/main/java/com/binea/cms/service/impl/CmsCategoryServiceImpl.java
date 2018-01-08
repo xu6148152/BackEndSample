@@ -1,6 +1,6 @@
 package com.binea.cms.service.impl;
 
-import com.binea.cms.dao.mapper.CmsCategoryMapper;
+import com.binea.pay.dao.mapper.CmsCategoryMapper;
 import com.binea.cms.service.CmsCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

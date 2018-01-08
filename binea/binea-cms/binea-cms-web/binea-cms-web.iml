@@ -29,7 +29,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="module" module-name="binea-cms-service" />
-    <orderEntry type="module" module-name="binea-cms-dao" />
+    <orderEntry type="module" module-name="binea-pay-dao" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" level="project" />

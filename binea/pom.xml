@@ -22,5 +22,6 @@
         <module>oss</module>
         <module>binea-qa</module>
         <module>binea-upms</module>
+        <module>binea-pay</module>
     </modules>
 </project>

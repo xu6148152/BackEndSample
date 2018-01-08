@@ -1,6 +1,6 @@
 package com.binea.cms.service.impl;
 
-import com.binea.cms.dao.mapper.CmsArticleMapper;
+import com.binea.pay.dao.mapper.CmsArticleMapper;
 import com.binea.cms.service.CmsArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
