@@ -53,5 +53,8 @@
     <!--<property name="destination" ref="defaultQueueDestination"/>-->
     <!--<property name="messageListener" ref="defaultQueueMessageListener"/>-->
     <!--</bean>-->
+    <bean id="jmsListenerContainerFactory" class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
     <jms:annotation-driven/>
 </beans>
