@@ -1,6 +1,6 @@
 package com.binea.cms.service.impl;
 
-import com.binea.pay.dao.mapper.UserMapper;
+import com.binea.cms.dao.mapper.UserMapper;
 import com.binea.mapper.UserVOMapper;
 import com.binea.cms.dao.model.UserVO;
 import com.binea.cms.service.UserService;

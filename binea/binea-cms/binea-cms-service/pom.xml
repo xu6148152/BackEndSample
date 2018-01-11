@@ -41,6 +41,11 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-cms-dao</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

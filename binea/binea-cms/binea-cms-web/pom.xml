@@ -53,6 +53,13 @@
             <artifactId>jetty-maven-plugin</artifactId>
             <version>9.3.14.v20161028</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
@@ -109,6 +116,14 @@
                     <skipTests>true</skipTests>
                     <!--是否忽略单元测试错误-->
                     <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

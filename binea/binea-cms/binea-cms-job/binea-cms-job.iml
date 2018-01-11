@@ -15,17 +15,18 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="binea-cms-rpc-api" />
-    <orderEntry type="module" module-name="binea-pay-dao" />
+    <orderEntry type="module" module-name="binea-cms-dao" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" level="project" />
@@ -38,7 +39,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.0.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis.generator:mybatis-generator-core:1.3.5" level="project" />
@@ -119,5 +119,7 @@
     <orderEntry type="library" name="Maven: junit:junit:unknown" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:unknown" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:unknown" level="project" />
+    <orderEntry type="module" module-name="binea-cms-service" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.0.RC4" level="project" />
   </component>
 </module>
