@@ -19,14 +19,14 @@ import java.nio.charset.Charset;
  */
 public class ConnectExample {
 
-    public static void connect(int port) {
+    public static void connect(String address, int port) {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(new NioEventLoopGroup()).handler(new ChannelInitializer<NioSocketChannel>() {
             protected void initChannel(NioSocketChannel ch) throws Exception {
                 ch.pipeline().addLast(new ConnectHandler());
             }
         }).channel(NioSocketChannel.class).
-                connect(new InetSocketAddress("192.168.10.145", port)).addListener(
+                connect(new InetSocketAddress(address, port)).addListener(
                 new ChannelFutureListener() {
                     public void operationComplete(ChannelFuture future) throws Exception {
                         if (future.isSuccess()) {

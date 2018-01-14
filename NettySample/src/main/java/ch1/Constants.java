@@ -7,4 +7,6 @@ package ch1;
  */
 public class Constants {
     public static final int PORT = 10001;
+
+    public static final String HOST = "192.168.10.145";
 }

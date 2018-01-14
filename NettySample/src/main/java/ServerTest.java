@@ -1,4 +1,8 @@
-package ch1;
+
+import ch1.BlockingIoExample;
+import ch1.Constants;
+import ch4.NettyNioServer;
+import ch4.PlainOioServer;
 
 import java.io.IOException;
 
@@ -9,11 +13,25 @@ import java.io.IOException;
  */
 public class ServerTest {
     public static void main(String args[]) {
+//        testBlockingExample();
+        testChannel();
+    }
+
+    private static void testBlockingExample() {
         BlockingIoExample blockingIoExample = new BlockingIoExample();
         try {
             System.out.println(String.format("start listener on %s port", Constants.PORT));
             blockingIoExample.serve(Constants.PORT);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testChannel() {
+        NettyNioServer plainOioServer = new NettyNioServer();
+        try {
+            plainOioServer.serve(Constants.PORT);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
