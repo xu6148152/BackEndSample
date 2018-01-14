@@ -1,4 +1,4 @@
-package blocking;
+package ch1;
 
 /**
  * Created by binea
