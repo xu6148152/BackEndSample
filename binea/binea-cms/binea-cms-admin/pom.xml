@@ -30,6 +30,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-upms-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -80,7 +85,7 @@
                         <contextPath>/binea-cms-admin</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>8081</port>
+                        <port>2222</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>

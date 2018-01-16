@@ -12,7 +12,6 @@
     <packaging>war</packaging>
 
     <name>binea-ucenter-home Maven Webapp</name>
-    <url>http://www.zhangshuzheng.cn</url>
 
     <dependencies>
         <dependency>
@@ -87,7 +86,7 @@
                         <contextPath>/binea-ucenter-home</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>4441</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>

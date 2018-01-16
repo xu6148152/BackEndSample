@@ -26,5 +26,9 @@
     <orderEntry type="library" name="Maven: junit:junit:unknown" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:unknown" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:unknown" level="project" />
+    <orderEntry type="module" module-name="binea-upms-client" />
+    <orderEntry type="module" module-name="binea-upms-service" />
+    <orderEntry type="module" module-name="binea-upms-dao" />
+    <orderEntry type="library" name="Maven: com.binea:binea-common:1.0.0" level="project" />
   </component>
 </module>

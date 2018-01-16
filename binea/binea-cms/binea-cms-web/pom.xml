@@ -99,11 +99,16 @@
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
-                <version>9.3.14.v20161028</version>
-                <artifactId>maven-jetty-plugin</artifactId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.7.v20150116</version>
                 <configuration>
-                    <contextPath>/cms-web</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/cms-web</contextPath>
+                    </webApp>
+                    <httpConnector>
+                        <port>2224</port>
+                    </httpConnector>
                     <reload>automatic</reload>
                 </configuration>
             </plugin>

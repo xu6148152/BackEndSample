@@ -86,7 +86,7 @@
                         <contextPath>/binea-pay-admin</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>3331</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>
