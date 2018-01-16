@@ -83,7 +83,7 @@
                 <configuration>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/binea-upms-server</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
                         <port>1111</port>

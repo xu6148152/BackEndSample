@@ -60,6 +60,11 @@
             <version>4.2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-upms-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -104,7 +109,7 @@
                 <configuration>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
                     <webApp>
-                        <contextPath>/cms-web</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
                         <port>2224</port>
