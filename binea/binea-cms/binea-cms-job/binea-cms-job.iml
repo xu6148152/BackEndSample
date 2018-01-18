@@ -27,6 +27,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="binea-cms-rpc-api" />
     <orderEntry type="module" module-name="binea-cms-dao" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.35" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:unknown" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:servlet-api:unknown" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:jstl:unknown" level="project" />
+    <orderEntry type="module" module-name="binea-cms-service" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.0.RC4" level="project" />
+    <orderEntry type="module" module-name="binea-upms-client" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.0.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.2.RELEASE" level="project" />
@@ -115,11 +122,7 @@
     <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: redis.clients:jedis:2.9.0" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.35" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:unknown" level="project" />
-    <orderEntry type="library" name="Maven: javax.servlet:servlet-api:unknown" level="project" />
-    <orderEntry type="library" name="Maven: javax.servlet:jstl:unknown" level="project" />
-    <orderEntry type="module" module-name="binea-cms-service" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-test:5.0.0.RC4" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
   </component>
 </module>

@@ -36,6 +36,13 @@
             <artifactId>binea-cms-service</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!-- zheng-upms-client -->
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-upms-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
