@@ -52,17 +52,18 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- Spring Security -->
-    <!--
     <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-name>binea-upms-client</filter-name>
+        <filter-class>com.binea.upms.client.filter.SSOFilter</filter-class>
+        <init-param>
+            <param-name>system_name</param-name>
+            <param-value>binea-cms-admin</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-name>binea-upms-client</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    -->
 
     <!-- Druid连接池监控页面 -->
     <servlet>

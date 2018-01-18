@@ -16,6 +16,11 @@
     <dependencies>
         <dependency>
             <groupId>com.binea</groupId>
+            <artifactId>binea-upms-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
             <artifactId>binea-upms-service</artifactId>
             <version>1.0.0</version>
             <type>jar</type>

@@ -2,8 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>upms-dao</module>
-        <module>upms-service</module>
+        <module>binea-upms-dao</module>
+        <module>binea-upms-service</module>
+        <module>binea-upms-client</module>
     </modules>
 
     <parent>
