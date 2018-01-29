@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-common</artifactId>
+            <artifactId>common</artifactId>
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
@@ -48,7 +48,7 @@
                 <dependencies>
                     <dependency>
                         <groupId>com.binea</groupId>
-                        <artifactId>binea-common</artifactId>
+                        <artifactId>common</artifactId>
                         <version>1.0.0</version>
                     </dependency>
                 </dependencies>

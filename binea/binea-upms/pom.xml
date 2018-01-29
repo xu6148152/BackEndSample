@@ -5,6 +5,8 @@
         <module>binea-upms-dao</module>
         <module>binea-upms-service</module>
         <module>binea-upms-client</module>
+        <module>binea-upms-rpc-api</module>
+        <module>binea-upms-rpc-service</module>
     </modules>
 
     <parent>
