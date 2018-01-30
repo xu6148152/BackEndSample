@@ -1,10 +1,12 @@
 package com.binea.upms.admin.controller;
 
 import com.binea.common.util.RedisUtil;
+import com.binea.upms.rpc.api.UpmsSystemService;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +39,9 @@ public class SSOController {
         apps.add("binea-cms-admin");
         apps.add("binea-upms-server");
     }
+
+    @Autowired
+    UpmsSystemService upmsSystemService;
 
     /**
      * 认证中心首页
