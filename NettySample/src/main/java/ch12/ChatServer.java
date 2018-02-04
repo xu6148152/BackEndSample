@@ -33,7 +33,7 @@ public class ChatServer {
     }
 
     public ChannelInitializer<Channel> createInitializer(ChannelGroup channelGroup) {
-        return null;
+        return new ChatServerInitializer(channelGroup);
     }
 
     public void destroy() {
