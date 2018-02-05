@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>binea-upms-client</artifactId>
+    <artifactId>binea-upms-sso-client</artifactId>
     <packaging>jar</packaging>
 
-    <name>binea-upms-client</name>
+    <name>binea-upms-sso-client</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -39,7 +39,7 @@
     </dependencies>
 
     <build>
-        <finalName>binea-upms-client</finalName>
+        <finalName>binea-upms-sso-client</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

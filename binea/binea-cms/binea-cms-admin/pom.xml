@@ -32,7 +32,7 @@
         </dependency>
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-upms-client</artifactId>
+            <artifactId>binea-upms-sso-client</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
