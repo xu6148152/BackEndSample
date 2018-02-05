@@ -1,15 +1,27 @@
 package com.binea.cms.dao.model;
 
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:47 PM
- */
-public class CmsArticleTag {
+import java.io.Serializable;
+
+public class CmsArticleTag implements Serializable {
+    /**
+     * 编号
+     *
+     * @mbg.generated
+     */
     private Integer articleTagId;
 
+    /**
+     * 文章编号
+     *
+     * @mbg.generated
+     */
     private Integer articleId;
 
+    /**
+     * 标签编号
+     *
+     * @mbg.generated
+     */
     private Integer tagId;
 
     private static final long serialVersionUID = 1L;
@@ -40,13 +52,16 @@ public class CmsArticleTag {
 
     @Override
     public String toString() {
-        return "CmsArticleTag{" +
-                "articleTagId=" + articleTagId +
-                ", articleId=" + articleId +
-                ", tagId=" + tagId +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", articleTagId=").append(articleTagId);
+        sb.append(", articleId=").append(articleId);
+        sb.append(", tagId=").append(tagId);
+        sb.append("]");
+        return sb.toString();
     }
-
 
     @Override
     public boolean equals(Object that) {
@@ -61,8 +76,8 @@ public class CmsArticleTag {
         }
         CmsArticleTag other = (CmsArticleTag) that;
         return (this.getArticleTagId() == null ? other.getArticleTagId() == null : this.getArticleTagId().equals(other.getArticleTagId()))
-                && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
-                && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
+            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
+            && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
     }
 
     @Override

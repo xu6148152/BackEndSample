@@ -2,18 +2,11 @@ package com.binea.cms.dao.mapper;
 
 import com.binea.cms.dao.model.CmsArticleCategory;
 import com.binea.cms.dao.model.CmsArticleCategoryExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:34 PM
- */
-
 public interface CmsArticleCategoryMapper {
-    int countByExample(CmsArticleCategoryExample example);
+    long countByExample(CmsArticleCategoryExample example);
 
     int deleteByExample(CmsArticleCategoryExample example);
 

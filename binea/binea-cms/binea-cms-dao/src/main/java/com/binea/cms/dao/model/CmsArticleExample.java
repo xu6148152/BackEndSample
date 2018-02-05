@@ -1,44 +1,17 @@
 package com.binea.cms.dao.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:47 PM
- */
-
-public class CmsArticleExample {
+public class CmsArticleExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    private Integer limit;
-
-    private Integer offset;
-
-    public void setOredCriteria(List<Criteria> oredCriteria) {
-        this.oredCriteria = oredCriteria;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
+    private static final long serialVersionUID = 1L;
 
     public CmsArticleExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -93,7 +66,7 @@ public class CmsArticleExample {
         distinct = false;
     }
 
-    protected abstract static class GeneratedCriteria {
+    protected abstract static class GeneratedCriteria implements Serializable {
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -191,6 +164,66 @@ public class CmsArticleExample {
 
         public Criteria andArticleIdNotBetween(Integer value1, Integer value2) {
             addCriterion("article_id not between", value1, value2, "articleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdIsNull() {
+            addCriterion("topic_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdIsNotNull() {
+            addCriterion("topic_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdEqualTo(Integer value) {
+            addCriterion("topic_id =", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdNotEqualTo(Integer value) {
+            addCriterion("topic_id <>", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdGreaterThan(Integer value) {
+            addCriterion("topic_id >", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic_id >=", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdLessThan(Integer value) {
+            addCriterion("topic_id <", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdLessThanOrEqualTo(Integer value) {
+            addCriterion("topic_id <=", value, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdIn(List<Integer> values) {
+            addCriterion("topic_id in", values, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdNotIn(List<Integer> values) {
+            addCriterion("topic_id not in", values, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdBetween(Integer value1, Integer value2) {
+            addCriterion("topic_id between", value1, value2, "topicId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopicIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("topic_id not between", value1, value2, "topicId");
             return (Criteria) this;
         }
 
@@ -854,126 +887,6 @@ public class CmsArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpIsNull() {
-            addCriterion("up is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpIsNotNull() {
-            addCriterion("up is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpEqualTo(Integer value) {
-            addCriterion("up =", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpNotEqualTo(Integer value) {
-            addCriterion("up <>", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpGreaterThan(Integer value) {
-            addCriterion("up >", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpGreaterThanOrEqualTo(Integer value) {
-            addCriterion("up >=", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpLessThan(Integer value) {
-            addCriterion("up <", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpLessThanOrEqualTo(Integer value) {
-            addCriterion("up <=", value, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpIn(List<Integer> values) {
-            addCriterion("up in", values, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpNotIn(List<Integer> values) {
-            addCriterion("up not in", values, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpBetween(Integer value1, Integer value2) {
-            addCriterion("up between", value1, value2, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpNotBetween(Integer value1, Integer value2) {
-            addCriterion("up not between", value1, value2, "up");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownIsNull() {
-            addCriterion("down is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownIsNotNull() {
-            addCriterion("down is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownEqualTo(Integer value) {
-            addCriterion("down =", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownNotEqualTo(Integer value) {
-            addCriterion("down <>", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownGreaterThan(Integer value) {
-            addCriterion("down >", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownGreaterThanOrEqualTo(Integer value) {
-            addCriterion("down >=", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownLessThan(Integer value) {
-            addCriterion("down <", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownLessThanOrEqualTo(Integer value) {
-            addCriterion("down <=", value, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownIn(List<Integer> values) {
-            addCriterion("down in", values, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownNotIn(List<Integer> values) {
-            addCriterion("down not in", values, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownBetween(Integer value1, Integer value2) {
-            addCriterion("down between", value1, value2, "down");
-            return (Criteria) this;
-        }
-
-        public Criteria andDownNotBetween(Integer value1, Integer value2) {
-            addCriterion("down not between", value1, value2, "down");
-            return (Criteria) this;
-        }
-
         public Criteria andReadnumberIsNull() {
             addCriterion("readnumber is null");
             return (Criteria) this;
@@ -1031,6 +944,126 @@ public class CmsArticleExample {
 
         public Criteria andReadnumberNotBetween(Integer value1, Integer value2) {
             addCriterion("readnumber not between", value1, value2, "readnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopIsNull() {
+            addCriterion("top is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopIsNotNull() {
+            addCriterion("top is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopEqualTo(Integer value) {
+            addCriterion("top =", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopNotEqualTo(Integer value) {
+            addCriterion("top <>", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopGreaterThan(Integer value) {
+            addCriterion("top >", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopGreaterThanOrEqualTo(Integer value) {
+            addCriterion("top >=", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopLessThan(Integer value) {
+            addCriterion("top <", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopLessThanOrEqualTo(Integer value) {
+            addCriterion("top <=", value, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopIn(List<Integer> values) {
+            addCriterion("top in", values, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopNotIn(List<Integer> values) {
+            addCriterion("top not in", values, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopBetween(Integer value1, Integer value2) {
+            addCriterion("top between", value1, value2, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andTopNotBetween(Integer value1, Integer value2) {
+            addCriterion("top not between", value1, value2, "top");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdIsNull() {
+            addCriterion("system_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdIsNotNull() {
+            addCriterion("system_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdEqualTo(Integer value) {
+            addCriterion("system_id =", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdNotEqualTo(Integer value) {
+            addCriterion("system_id <>", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdGreaterThan(Integer value) {
+            addCriterion("system_id >", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("system_id >=", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdLessThan(Integer value) {
+            addCriterion("system_id <", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdLessThanOrEqualTo(Integer value) {
+            addCriterion("system_id <=", value, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdIn(List<Integer> values) {
+            addCriterion("system_id in", values, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdNotIn(List<Integer> values) {
+            addCriterion("system_id not in", values, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdBetween(Integer value1, Integer value2) {
+            addCriterion("system_id between", value1, value2, "systemId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSystemIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("system_id not between", value1, value2, "systemId");
             return (Criteria) this;
         }
 
@@ -1155,14 +1188,14 @@ public class CmsArticleExample {
         }
     }
 
-    public static class Criteria extends GeneratedCriteria {
+    public static class Criteria extends GeneratedCriteria implements Serializable {
 
         protected Criteria() {
             super();
         }
     }
 
-    public static class Criterion {
+    public static class Criterion implements Serializable {
         private String condition;
 
         private Object value;

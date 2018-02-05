@@ -2,18 +2,11 @@ package com.binea.cms.dao.mapper;
 
 import com.binea.cms.dao.model.CmsCategoryTag;
 import com.binea.cms.dao.model.CmsCategoryTagExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:41 PM
- */
-
 public interface CmsCategoryTagMapper {
-    int countByExample(CmsCategoryTagExample example);
+    long countByExample(CmsCategoryTagExample example);
 
     int deleteByExample(CmsCategoryTagExample example);
 

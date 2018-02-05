@@ -1,15 +1,27 @@
 package com.binea.cms.dao.model;
 
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:50 PM
- */
-public class CmsCategoryTag {
+import java.io.Serializable;
+
+public class CmsCategoryTag implements Serializable {
+    /**
+     * 编号
+     *
+     * @mbg.generated
+     */
     private Integer categoryTagId;
 
+    /**
+     * 类目编号
+     *
+     * @mbg.generated
+     */
     private Integer categoryId;
 
+    /**
+     * 标签编号
+     *
+     * @mbg.generated
+     */
     private Integer tagId;
 
     private static final long serialVersionUID = 1L;
@@ -40,13 +52,16 @@ public class CmsCategoryTag {
 
     @Override
     public String toString() {
-        return "CmsCategoryTag{" +
-                "categoryTagId=" + categoryTagId +
-                ", categoryId=" + categoryId +
-                ", tagId=" + tagId +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", categoryTagId=").append(categoryTagId);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append(", tagId=").append(tagId);
+        sb.append("]");
+        return sb.toString();
     }
-
 
     @Override
     public boolean equals(Object that) {
@@ -61,8 +76,8 @@ public class CmsCategoryTag {
         }
         CmsCategoryTag other = (CmsCategoryTag) that;
         return (this.getCategoryTagId() == null ? other.getCategoryTagId() == null : this.getCategoryTagId().equals(other.getCategoryTagId()))
-                && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
-                && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
+            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
+            && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
     }
 
     @Override
@@ -74,5 +89,4 @@ public class CmsCategoryTag {
         result = prime * result + ((getTagId() == null) ? 0 : getTagId().hashCode());
         return result;
     }
-
 }

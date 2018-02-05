@@ -1,43 +1,132 @@
 package com.binea.cms.dao.model;
 
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:44 PM
- */
-public class CmsArticle {
+import java.io.Serializable;
+
+public class CmsArticle implements Serializable {
+    /**
+     * 文章编号
+     *
+     * @mbg.generated
+     */
     private Integer articleId;
 
+    /**
+     * 所属专题
+     *
+     * @mbg.generated
+     */
+    private Integer topicId;
+
+    /**
+     * 文章标题
+     *
+     * @mbg.generated
+     */
     private String title;
 
+    /**
+     * 文章原作者
+     *
+     * @mbg.generated
+     */
     private String author;
 
+    /**
+     * 转载来源网址
+     *
+     * @mbg.generated
+     */
     private String fromurl;
 
+    /**
+     * 封面图
+     *
+     * @mbg.generated
+     */
     private String image;
 
+    /**
+     * 关键字
+     *
+     * @mbg.generated
+     */
     private String keywords;
 
+    /**
+     * 简介
+     *
+     * @mbg.generated
+     */
     private String description;
 
+    /**
+     * 类型(1:普通,2:热门...)
+     *
+     * @mbg.generated
+     */
     private Byte type;
 
+    /**
+     * 是否允许评论(0:不允许,1:允许)
+     *
+     * @mbg.generated
+     */
     private Byte allowcomments;
 
+    /**
+     * 状态(-1:不通过,0未审核,1:通过)
+     *
+     * @mbg.generated
+     */
     private Byte status;
 
+    /**
+     * 发布人id
+     *
+     * @mbg.generated
+     */
     private Integer userId;
 
-    private Integer up;
-
-    private Integer down;
-
+    /**
+     * 阅读数量
+     *
+     * @mbg.generated
+     */
     private Integer readnumber;
 
+    /**
+     * 置顶等级
+     *
+     * @mbg.generated
+     */
+    private Integer top;
+
+    /**
+     * 所属系统
+     *
+     * @mbg.generated
+     */
+    private Integer systemId;
+
+    /**
+     * 创建时间
+     *
+     * @mbg.generated
+     */
     private Long ctime;
 
+    /**
+     * 排序
+     *
+     * @mbg.generated
+     */
     private Long orders;
 
+    /**
+     * 内容
+     *
+     * @mbg.generated
+     */
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +137,14 @@ public class CmsArticle {
 
     public void setArticleId(Integer articleId) {
         this.articleId = articleId;
+    }
+
+    public Integer getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 
     public String getTitle() {
@@ -130,28 +227,28 @@ public class CmsArticle {
         this.userId = userId;
     }
 
-    public Integer getUp() {
-        return up;
-    }
-
-    public void setUp(Integer up) {
-        this.up = up;
-    }
-
-    public Integer getDown() {
-        return down;
-    }
-
-    public void setDown(Integer down) {
-        this.down = down;
-    }
-
     public Integer getReadnumber() {
         return readnumber;
     }
 
     public void setReadnumber(Integer readnumber) {
         this.readnumber = readnumber;
+    }
+
+    public Integer getTop() {
+        return top;
+    }
+
+    public void setTop(Integer top) {
+        this.top = top;
+    }
+
+    public Integer getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(Integer systemId) {
+        this.systemId = systemId;
     }
 
     public Long getCtime() {
@@ -180,25 +277,30 @@ public class CmsArticle {
 
     @Override
     public String toString() {
-        return "CmsArticle{" +
-                "articleId=" + articleId +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", fromurl='" + fromurl + '\'' +
-                ", image='" + image + '\'' +
-                ", keywords='" + keywords + '\'' +
-                ", description='" + description + '\'' +
-                ", type=" + type +
-                ", allowcomments=" + allowcomments +
-                ", status=" + status +
-                ", userId=" + userId +
-                ", up=" + up +
-                ", down=" + down +
-                ", readnumber=" + readnumber +
-                ", ctime=" + ctime +
-                ", orders=" + orders +
-                ", content='" + content + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", articleId=").append(articleId);
+        sb.append(", topicId=").append(topicId);
+        sb.append(", title=").append(title);
+        sb.append(", author=").append(author);
+        sb.append(", fromurl=").append(fromurl);
+        sb.append(", image=").append(image);
+        sb.append(", keywords=").append(keywords);
+        sb.append(", description=").append(description);
+        sb.append(", type=").append(type);
+        sb.append(", allowcomments=").append(allowcomments);
+        sb.append(", status=").append(status);
+        sb.append(", userId=").append(userId);
+        sb.append(", readnumber=").append(readnumber);
+        sb.append(", top=").append(top);
+        sb.append(", systemId=").append(systemId);
+        sb.append(", ctime=").append(ctime);
+        sb.append(", orders=").append(orders);
+        sb.append(", content=").append(content);
+        sb.append("]");
+        return sb.toString();
     }
 
     @Override
@@ -213,30 +315,24 @@ public class CmsArticle {
             return false;
         }
         CmsArticle other = (CmsArticle) that;
-        return (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(
-                other.getArticleId()))
-                && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-                && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
-                && (this.getFromurl() == null ? other.getFromurl() == null : this.getFromurl().equals(
-                other.getFromurl()))
-                && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()))
-                && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(
-                other.getKeywords()))
-                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(
-                other.getDescription()))
-                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-                && (this.getAllowcomments() == null ? other.getAllowcomments() == null : this.getAllowcomments().equals(
-                other.getAllowcomments()))
-                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-                && (this.getUp() == null ? other.getUp() == null : this.getUp().equals(other.getUp()))
-                && (this.getDown() == null ? other.getDown() == null : this.getDown().equals(other.getDown()))
-                && (this.getReadnumber() == null ? other.getReadnumber() == null : this.getReadnumber().equals(
-                other.getReadnumber()))
-                && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
-                && (this.getOrders() == null ? other.getOrders() == null : this.getOrders().equals(other.getOrders()))
-                && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(
-                other.getContent()));
+        return (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
+            && (this.getTopicId() == null ? other.getTopicId() == null : this.getTopicId().equals(other.getTopicId()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getAuthor() == null ? other.getAuthor() == null : this.getAuthor().equals(other.getAuthor()))
+            && (this.getFromurl() == null ? other.getFromurl() == null : this.getFromurl().equals(other.getFromurl()))
+            && (this.getImage() == null ? other.getImage() == null : this.getImage().equals(other.getImage()))
+            && (this.getKeywords() == null ? other.getKeywords() == null : this.getKeywords().equals(other.getKeywords()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getAllowcomments() == null ? other.getAllowcomments() == null : this.getAllowcomments().equals(other.getAllowcomments()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getReadnumber() == null ? other.getReadnumber() == null : this.getReadnumber().equals(other.getReadnumber()))
+            && (this.getTop() == null ? other.getTop() == null : this.getTop().equals(other.getTop()))
+            && (this.getSystemId() == null ? other.getSystemId() == null : this.getSystemId().equals(other.getSystemId()))
+            && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
+            && (this.getOrders() == null ? other.getOrders() == null : this.getOrders().equals(other.getOrders()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
     @Override
@@ -244,6 +340,7 @@ public class CmsArticle {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
+        result = prime * result + ((getTopicId() == null) ? 0 : getTopicId().hashCode());
         result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
         result = prime * result + ((getAuthor() == null) ? 0 : getAuthor().hashCode());
         result = prime * result + ((getFromurl() == null) ? 0 : getFromurl().hashCode());
@@ -254,9 +351,9 @@ public class CmsArticle {
         result = prime * result + ((getAllowcomments() == null) ? 0 : getAllowcomments().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
-        result = prime * result + ((getUp() == null) ? 0 : getUp().hashCode());
-        result = prime * result + ((getDown() == null) ? 0 : getDown().hashCode());
         result = prime * result + ((getReadnumber() == null) ? 0 : getReadnumber().hashCode());
+        result = prime * result + ((getTop() == null) ? 0 : getTop().hashCode());
+        result = prime * result + ((getSystemId() == null) ? 0 : getSystemId().hashCode());
         result = prime * result + ((getCtime() == null) ? 0 : getCtime().hashCode());
         result = prime * result + ((getOrders() == null) ? 0 : getOrders().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());

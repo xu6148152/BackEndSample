@@ -1,15 +1,27 @@
 package com.binea.cms.dao.model;
 
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:45 PM
- */
-public class CmsArticleCategory {
+import java.io.Serializable;
+
+public class CmsArticleCategory implements Serializable {
+    /**
+     * 编号
+     *
+     * @mbg.generated
+     */
     private Integer articleCategoryId;
 
+    /**
+     * 文章编号
+     *
+     * @mbg.generated
+     */
     private Integer articleId;
 
+    /**
+     * 类目编号
+     *
+     * @mbg.generated
+     */
     private Integer categoryId;
 
     private static final long serialVersionUID = 1L;
@@ -40,13 +52,16 @@ public class CmsArticleCategory {
 
     @Override
     public String toString() {
-        return "CmsArticleCategory{" +
-                "articleCategoryId=" + articleCategoryId +
-                ", articleId=" + articleId +
-                ", categoryId=" + categoryId +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", articleCategoryId=").append(articleCategoryId);
+        sb.append(", articleId=").append(articleId);
+        sb.append(", categoryId=").append(categoryId);
+        sb.append("]");
+        return sb.toString();
     }
-
 
     @Override
     public boolean equals(Object that) {
@@ -60,12 +75,9 @@ public class CmsArticleCategory {
             return false;
         }
         CmsArticleCategory other = (CmsArticleCategory) that;
-        return (this.getArticleCategoryId() == null ? other.getArticleCategoryId() == null : this.getArticleCategoryId().equals(
-                other.getArticleCategoryId()))
-                && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(
-                other.getArticleId()))
-                && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(
-                other.getCategoryId()));
+        return (this.getArticleCategoryId() == null ? other.getArticleCategoryId() == null : this.getArticleCategoryId().equals(other.getArticleCategoryId()))
+            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
+            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()));
     }
 
     @Override
@@ -77,5 +89,4 @@ public class CmsArticleCategory {
         result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
         return result;
     }
-
 }

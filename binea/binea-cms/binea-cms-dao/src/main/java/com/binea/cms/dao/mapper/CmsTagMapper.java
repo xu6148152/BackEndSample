@@ -2,17 +2,11 @@ package com.binea.cms.dao.mapper;
 
 import com.binea.cms.dao.model.CmsTag;
 import com.binea.cms.dao.model.CmsTagExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-/**
- * Created by binea
- * Date: 30/11/2017
- * TIME: 10:42 PM
- */
 public interface CmsTagMapper {
-    int countByExample(CmsTagExample example);
+    long countByExample(CmsTagExample example);
 
     int deleteByExample(CmsTagExample example);
 
@@ -24,14 +18,13 @@ public interface CmsTagMapper {
 
     List<CmsTag> selectByExample(CmsTagExample example);
 
+    CmsTag selectByPrimaryKey(Integer tagId);
+
     int updateByExampleSelective(@Param("record") CmsTag record, @Param("example") CmsTagExample example);
 
     int updateByExample(@Param("record") CmsTag record, @Param("example") CmsTagExample example);
 
-    CmsTag selectByPrimaryKey(Integer tagId);
-
     int updateByPrimaryKeySelective(CmsTag record);
 
     int updateByPrimaryKey(CmsTag record);
-
 }

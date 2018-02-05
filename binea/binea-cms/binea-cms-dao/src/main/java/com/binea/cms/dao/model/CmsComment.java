@@ -1,27 +1,76 @@
 package com.binea.cms.dao.model;
 
-/**
- * Created by binea
- * Date: 6/12/2017
- * TIME: 10:35 PM
- */
-public class CmsComment {
+import java.io.Serializable;
+
+public class CmsComment implements Serializable {
+    /**
+     * 编号
+     *
+     * @mbg.generated
+     */
     private Integer commentId;
 
+    /**
+     * 回复楼中楼编号回复楼中楼编号
+     *
+     * @mbg.generated
+     */
     private Integer pid;
 
+    /**
+     * 文章编号
+     *
+     * @mbg.generated
+     */
     private Integer articleId;
 
+    /**
+     * 用户编号
+     *
+     * @mbg.generated
+     */
     private Integer userId;
 
+    /**
+     * 状态(-1:不通过,0:未审核,1:通过)
+     *
+     * @mbg.generated
+     */
     private Byte status;
 
+    /**
+     * 评论人ip地址
+     *
+     * @mbg.generated
+     */
     private String ip;
 
+    /**
+     * 评论人终端信息
+     *
+     * @mbg.generated
+     */
     private String agent;
 
+    /**
+     * 所属系统
+     *
+     * @mbg.generated
+     */
+    private Integer systemId;
+
+    /**
+     * 创建时间
+     *
+     * @mbg.generated
+     */
     private Long ctime;
 
+    /**
+     * 评论内容
+     *
+     * @mbg.generated
+     */
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -82,6 +131,14 @@ public class CmsComment {
         this.agent = agent;
     }
 
+    public Integer getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(Integer systemId) {
+        this.systemId = systemId;
+    }
+
     public Long getCtime() {
         return ctime;
     }
@@ -100,19 +157,23 @@ public class CmsComment {
 
     @Override
     public String toString() {
-        return "CmsComment{" +
-                "commentId=" + commentId +
-                ", pid=" + pid +
-                ", articleId=" + articleId +
-                ", userId=" + userId +
-                ", status=" + status +
-                ", ip='" + ip + '\'' +
-                ", agent='" + agent + '\'' +
-                ", ctime=" + ctime +
-                ", content='" + content + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", commentId=").append(commentId);
+        sb.append(", pid=").append(pid);
+        sb.append(", articleId=").append(articleId);
+        sb.append(", userId=").append(userId);
+        sb.append(", status=").append(status);
+        sb.append(", ip=").append(ip);
+        sb.append(", agent=").append(agent);
+        sb.append(", systemId=").append(systemId);
+        sb.append(", ctime=").append(ctime);
+        sb.append(", content=").append(content);
+        sb.append("]");
+        return sb.toString();
     }
-
 
     @Override
     public boolean equals(Object that) {
@@ -127,14 +188,15 @@ public class CmsComment {
         }
         CmsComment other = (CmsComment) that;
         return (this.getCommentId() == null ? other.getCommentId() == null : this.getCommentId().equals(other.getCommentId()))
-                && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
-                && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
-                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-                && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
-                && (this.getAgent() == null ? other.getAgent() == null : this.getAgent().equals(other.getAgent()))
-                && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
-                && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
+            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
+            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()))
+            && (this.getAgent() == null ? other.getAgent() == null : this.getAgent().equals(other.getAgent()))
+            && (this.getSystemId() == null ? other.getSystemId() == null : this.getSystemId().equals(other.getSystemId()))
+            && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
     @Override
@@ -148,6 +210,7 @@ public class CmsComment {
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getIp() == null) ? 0 : getIp().hashCode());
         result = prime * result + ((getAgent() == null) ? 0 : getAgent().hashCode());
+        result = prime * result + ((getSystemId() == null) ? 0 : getSystemId().hashCode());
         result = prime * result + ((getCtime() == null) ? 0 : getCtime().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;

@@ -2,17 +2,11 @@ package com.binea.cms.dao.mapper;
 
 import com.binea.cms.dao.model.CmsComment;
 import com.binea.cms.dao.model.CmsCommentExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-/**
- * Created by binea
- * Date: 6/12/2017
- * TIME: 10:25 PM
- */
 public interface CmsCommentMapper {
-    int countByExample(CmsCommentExample example);
+    long countByExample(CmsCommentExample example);
 
     int deleteByExample(CmsCommentExample example);
 
