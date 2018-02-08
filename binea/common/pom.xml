@@ -26,6 +26,7 @@
         <mybatis-ehcache.version>1.0.0</mybatis-ehcache.version>
         <ehcache.version>2.10.0</ehcache.version>
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <mybatis-pagehelper.version>5.0.1</mybatis-pagehelper.version>
     </properties>
 
     <dependencies>
@@ -270,6 +271,11 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${mybatis-pagehelper.version}</version>
         </dependency>
     </dependencies>
 
