@@ -5,3 +5,6 @@ binea/cms/cms-service/target/*
 binea/cms/cms-dao/target/*
 */target/**
 NettySample/*.iml
+GoSample/pkg/*
+GoSample/bin/*
+*.iml
