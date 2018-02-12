@@ -13,13 +13,13 @@ const (
 
 func main() {
 	c := 5 + 5i
-	fmt.Println("Hello, world. Sqrt(2) = %v\n", mymath.Sqrt(2))
-	fmt.Println("Value is :%v", c)
+	fmt.Printf("Hello, world. Sqrt(2) = %v\n", mymath.Sqrt(2))
+	fmt.Printf("Value is :%v", c)
 	s := `hello`
 	t := []byte(s)
 	t[0] = 'c'
 	s2 := string(t)
-	fmt.Println("%s\n", s2)
+	fmt.Printf("%s\n", s2)
 	err := errors.New("emit macho dwarf: elf header corrupted")
 	if err != nil {
 		fmt.Println(err)
@@ -28,7 +28,7 @@ func main() {
 	var arr [10]int
 	arr[0] = 42
 	arr[1] = 13
-	fmt.Println("%d", arr[0])
+	fmt.Printf("%d", arr[0])
 
 	a := [3]int{1, 2, 3}
 	fmt.Println(a)
