@@ -1,0 +1,31 @@
+package com.binea.ucenter.dao.mapper;
+
+import com.binea.ucenter.dao.model.UcenterUserDetails;
+import com.binea.ucenter.dao.model.UcenterUserDetailsExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface UcenterUserDetailsMapper {
+    long countByExample(UcenterUserDetailsExample example);
+
+    int deleteByExample(UcenterUserDetailsExample example);
+
+    int deleteByPrimaryKey(Integer userId);
+
+    int insert(UcenterUserDetails record);
+
+    int insertSelective(UcenterUserDetails record);
+
+    List<UcenterUserDetails> selectByExample(UcenterUserDetailsExample example);
+
+    UcenterUserDetails selectByPrimaryKey(Integer userId);
+
+    int updateByExampleSelective(@Param("record") UcenterUserDetails record, @Param("example") UcenterUserDetailsExample example);
+
+    int updateByExample(@Param("record") UcenterUserDetails record, @Param("example") UcenterUserDetailsExample example);
+
+    int updateByPrimaryKeySelective(UcenterUserDetails record);
+
+    int updateByPrimaryKey(UcenterUserDetails record);
+}

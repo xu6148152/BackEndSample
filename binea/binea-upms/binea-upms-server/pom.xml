@@ -21,6 +21,11 @@
         </dependency>
         <dependency>
             <groupId>com.binea</groupId>
+            <artifactId>binea-admin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
             <artifactId>binea-upms-rpc-api</artifactId>
             <version>1.0.0</version>
             <type>jar</type>

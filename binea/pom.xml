@@ -23,5 +23,6 @@
         <module>binea-qa</module>
         <module>binea-upms</module>
         <module>binea-pay</module>
+        <module>binea-admin</module>
     </modules>
 </project>
