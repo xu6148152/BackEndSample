@@ -1,15 +1,20 @@
 package com.binea.upms.rpc.api;
 
 import com.binea.common.base.BaseService;
-import com.binea.upms.dao.mapper.UpmsSystemMapper;
 import com.binea.upms.dao.model.UpmsSystem;
 import com.binea.upms.dao.model.UpmsSystemExample;
 
 /**
- * Created by binea
- * Date: 29/1/2018
- * TIME: 10:21 PM
- */
-public interface UpmsSystemService extends BaseService<UpmsSystemMapper, UpmsSystemExample> {
-    int deleteByPrimaryKeys(String ids);
+* UpmsSystemService接口
+* Created by binea on 2017/3/20.
+*/
+public interface UpmsSystemService extends BaseService<UpmsSystem, UpmsSystemExample> {
+
+    /**
+     * 根据name获取UpmsSystem
+     * @param name
+     * @return
+     */
+    UpmsSystem selectUpmsSystemByName(String name);
+
 }

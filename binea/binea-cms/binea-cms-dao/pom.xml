@@ -29,6 +29,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.35</version>
         </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

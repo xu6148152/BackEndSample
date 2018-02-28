@@ -16,11 +16,22 @@
     <dependencies>
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-cms-service</artifactId>
+            <artifactId>binea-cms-rpc-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-admin</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.binea</groupId>
+            <artifactId>binea-upms-sso-client</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -29,11 +40,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.binea</groupId>
-            <artifactId>binea-upms-sso-client</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

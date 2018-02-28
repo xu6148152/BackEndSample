@@ -19,7 +19,6 @@
 
     <modules>
         <module>binea-cms-dao</module>
-        <module>binea-cms-service</module>
         <module>binea-cms-web</module>
         <module>binea-cms-admin</module>
         <module>binea-cms-job</module>

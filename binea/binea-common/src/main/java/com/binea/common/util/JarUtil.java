@@ -11,15 +11,9 @@ import java.util.jar.JarFile;
  * TIME: 10:27 PM
  */
 public class JarUtil {
-    public static void main(String[] args) {
-        System.out.println("start");
-        decompress("", "");
-        System.out.println("end");
-    }
 
     /**
      * 解压jar文件到指定目录
-     *
      * @param fileName
      * @param outputPath
      */
@@ -38,7 +32,7 @@ public class JarUtil {
         try {
             jf = new JarFile(fileName);
             for (Enumeration<JarEntry> e = jf.entries(); e.hasMoreElements(); ) {
-                JarEntry je = (JarEntry) e.nextElement();
+                JarEntry je = e.nextElement();
                 String outFileName = outputPath + je.getName();
                 File f = new File(outFileName);
                 if (je.isDirectory()) {
@@ -54,7 +48,7 @@ public class JarUtil {
                     OutputStream out = new BufferedOutputStream(
                             new FileOutputStream(f));
                     byte[] buffer = new byte[2048];
-                    int nBytes = 0;
+                    int nBytes;
                     while ((nBytes = in.read(buffer)) > 0) {
                         out.write(buffer, 0, nBytes);
                     }
@@ -64,7 +58,7 @@ public class JarUtil {
                 }
             }
         } catch (Exception e) {
-            System.out.println("解压" + fileName + "出错---" + e.getMessage());
+            System.out.println("解压" + fileName + "出错！" + e.getMessage());
         } finally {
             if (jf != null) {
                 try {
@@ -75,4 +69,5 @@ public class JarUtil {
             }
         }
     }
+
 }
