@@ -27,7 +27,7 @@ var (
 func init() {
 	redisHost := ":6379"
 	Pool = newPool(redisHost)
-	close()
+	closed()
 }
 
 func newPool(server string) *redis.Pool {
@@ -48,7 +48,7 @@ func newPool(server string) *redis.Pool {
 	}
 }
 
-func close() {
+func closed() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	signal.Notify(c, syscall.SIGTERM)

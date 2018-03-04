@@ -15,8 +15,7 @@ func say(s string) {
 
 func sum(a []int, c chan int) {
 	total := 0
-	for i, v := range a {
-		fmt.Printf("index %d\n", i)
+	for _, v := range a {
 		total += v
 	}
 	c <- total
@@ -69,16 +68,47 @@ func testFibonacci() {
 	fibonacci(c, quit)
 }
 
-func
-testSay() {
+func testSay() {
 	go say("hello")
 	say("hello")
 }
 
-func
-main() {
+func testSum() {
+	s := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	c := make(chan int, 10)
+	defer close(c)
+	go sum(s[:len(s)/2], c)
+	go sum(s[len(s)/2:], c)
+	x, y := <-c, <-c
+	fmt.Println(x, y, x+y)
+}
+
+func testSleep() {
+	c := make(chan int)
+	go func() {
+		defer close(c)
+		for i := 0; i < 10; i++ {
+			c <- i
+		}
+	}()
+
+	for i := range c {
+		fmt.Println(i)
+	}
+}
+
+func testTimer() {
+	timer1 := time.NewTimer(time.Second * 2)
+	<-timer1.C
+	fmt.Println("Timer1 expired")
+}
+
+func main() {
 	//testSay()
 	//testChannel()
 	//testCacheChannel()
-	testFibonacci()
+	//testFibonacci()
+	//testSum()
+	//testSleep()
+	testTimer()
 }
