@@ -3,9 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>binea-upms-dao</module>
-        <module>binea-upms-sso-client</module>
+        <module>binea-upms-client</module>
         <module>binea-upms-rpc-api</module>
         <module>binea-upms-rpc-service</module>
+        <module>binea-upms-common</module>
     </modules>
 
     <parent>

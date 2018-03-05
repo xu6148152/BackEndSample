@@ -24,6 +24,7 @@
         <module>binea-cms-job</module>
         <module>binea-cms-search</module>
         <module>binea-cms-rpc-api</module>
+        <module>binea-cms-common</module>
     </modules>
 
 </project>

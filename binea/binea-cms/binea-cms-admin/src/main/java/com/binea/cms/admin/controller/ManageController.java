@@ -18,16 +18,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Api(value = "后台控制器", description = "后台管理")
 public class ManageController extends BaseController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ManageController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ManageController.class);
 
-	/**
-	 * 后台首页
-	 * @return
-	 */
-	@ApiOperation(value = "后台首页")
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index() {
-		return "/manage/index.jsp";
-	}
+    /**
+     * 后台首页
+     *
+     * @return
+     */
+    @ApiOperation(value = "后台首页")
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index() {
+        return "/manage/index.jsp";
+    }
 
+    @RequestMapping("/login")
+    public String login() {
+        return "/manage/login";
+    }
 }

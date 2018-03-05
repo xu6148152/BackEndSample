@@ -4,6 +4,8 @@ package com.binea.cms.admin.controller.manage;
 import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.baidu.unbiz.fluentvalidator.FluentValidator;
 import com.baidu.unbiz.fluentvalidator.ResultCollectors;
+import com.binea.cms.common.constant.CmsResult;
+import com.binea.cms.common.constant.CmsResultConstant;
 import com.binea.cms.dao.model.CmsArticle;
 import com.binea.cms.dao.model.CmsArticleExample;
 import com.binea.cms.dao.model.CmsTopic;
