@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <name>binea-upms-common</name>
-    <url>http://www.zhangshuzheng.cn</url>
+    <url>http://www.binea.cn</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

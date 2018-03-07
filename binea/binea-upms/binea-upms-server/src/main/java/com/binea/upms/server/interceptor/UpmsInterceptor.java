@@ -21,14 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 public class UpmsInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpmsInterceptor.class);
-    private static final String ZHENG_OSS_ALIYUN_OSS_POLICY = PropertiesFileUtil.getInstance("binea-oss-client").get("binea.oss.aliyun.oss.policy");
+    private static final String BINEA_OSS_ALIYUN_OSS_POLICY = PropertiesFileUtil.getInstance("binea-oss-client").get("binea.oss.aliyun.oss.policy");
 
     @Autowired
     UpmsApiService upmsApiService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        request.setAttribute("ZHENG_OSS_ALIYUN_OSS_POLICY", ZHENG_OSS_ALIYUN_OSS_POLICY);
+        request.setAttribute("BINEA_OSS_ALIYUN_OSS_POLICY", BINEA_OSS_ALIYUN_OSS_POLICY);
         // 过滤ajax
         if (null != request.getHeader("X-Requested-With") && "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"))) {
             return true;

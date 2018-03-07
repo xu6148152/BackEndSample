@@ -95,6 +95,7 @@ public class RedisUtil {
 
     /**
      * 同步获取Jedis实例
+     *
      * @return Jedis
      */
     public synchronized static Jedis getJedis() {
@@ -116,6 +117,7 @@ public class RedisUtil {
 
     /**
      * 释放jedis资源
+     *
      * @param jedis
      */
     public static void returnResource(final Jedis jedis) {
@@ -126,6 +128,7 @@ public class RedisUtil {
 
     /**
      * 设置 String
+     *
      * @param key
      * @param value
      */
@@ -140,6 +143,7 @@ public class RedisUtil {
 
     /**
      * 设置 过期时间
+     *
      * @param key
      * @param value
      * @param seconds 以秒为单位
@@ -155,6 +159,7 @@ public class RedisUtil {
 
     /**
      * 获取String值
+     *
      * @param key
      * @return value
      */
@@ -167,6 +172,7 @@ public class RedisUtil {
 
     /**
      * 删除值
+     *
      * @param key
      */
     public synchronized static void remove(String key) {
@@ -177,4 +183,53 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * sadd
+     *
+     * @param key
+     * @param value
+     * @param seconds
+     */
+    public synchronized static void sadd(String key, String value, int seconds) {
+        try {
+            Jedis jedis = RedisUtil.getJedis();
+            jedis.sadd(key, value);
+            jedis.expire(key, seconds);
+            jedis.close();
+        } catch (Exception e) {
+            logger.error("sadd error : " + e);
+        }
+    }
+
+    /**
+     * lrem
+     *
+     * @param key
+     * @param count
+     * @param value
+     */
+    public synchronized static void lrem(String key, long count, String value) {
+        try {
+            Jedis jedis = RedisUtil.getJedis();
+            jedis.lrem(key, count, value);
+            jedis.close();
+        } catch (Exception e) {
+            logger.error("lpush error : " + e);
+        }
+    }
+
+    /**
+     * lpush
+     * @param key
+     * @param key
+     */
+    public synchronized static void lpush(String key, String... strings) {
+        try {
+            Jedis jedis = RedisUtil.getJedis();
+            jedis.lpush(key, strings);
+            jedis.close();
+        } catch (Exception e) {
+            logger.error("lpush error : " + e);
+        }
+    }
 }
