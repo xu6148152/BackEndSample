@@ -23,7 +23,6 @@ func testCounting() {
 	}
 }
 
-
 func main() {
 	testCounting()
 }

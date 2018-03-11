@@ -1,6 +1,7 @@
 package main
 
 import (
+	"container/list"
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
@@ -9,7 +10,6 @@ import (
 	"net/url"
 	"sync"
 	"time"
-	"container/list"
 )
 
 var globalSessions *Manager

@@ -6,12 +6,12 @@ import (
 	"encoding/xml"
 	"fmt"
 	_ "html"
+	"html/template"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
 	"strings"
-	"html/template"
 )
 
 type RecurseServers struct {
@@ -194,7 +194,7 @@ func testEmailDealWith() {
 	{{end}}
 	`)
 	p := PersonT{UserName: "binea",
-		Emails: []string{"binea@qq.me", "binea@qq.com"},
+		Emails:  []string{"binea@qq.me", "binea@qq.com"},
 		Friends: []*Friend{&f1, &f2}}
 	t.Execute(os.Stdout, p)
 }

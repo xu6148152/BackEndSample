@@ -1,9 +1,9 @@
 package main
 
 import (
-	"mymath"
-	"fmt"
 	"errors"
+	"fmt"
+	"GoBasic/mymath"
 )
 
 const (
@@ -99,7 +99,7 @@ func filter(slice []int, f testInt) []int {
 }
 
 func testFilter() {
-	slice := []int {1, 2, 3, 4, 5, 6, 7}
+	slice := []int{1, 2, 3, 4, 5, 6, 7}
 	fmt.Println("slice = ", slice)
 	odd := filter(slice, isOdd)
 	fmt.Println("Odd elements of slice are: ", odd)

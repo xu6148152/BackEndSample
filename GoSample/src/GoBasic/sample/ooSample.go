@@ -22,7 +22,7 @@ func (c Circle) area() float64 {
 }
 
 const (
-	WHITE  = iota
+	WHITE = iota
 	BLACK
 	BLUE
 	RED
@@ -104,7 +104,7 @@ func testMethod() {
 }
 
 type Employee struct {
-	Human //匿名字段
+	Human   //匿名字段
 	company string
 	money   float32
 }

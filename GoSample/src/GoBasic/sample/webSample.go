@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"strings"
-	"log"
-	"html/template"
-	"time"
-	"crypto/md5"
-	"io"
-	"strconv"
-	"os"
 	"bytes"
-	"mime/multipart"
+	"crypto/md5"
+	"fmt"
+	"html/template"
+	"io"
 	"io/ioutil"
+	"log"
+	"mime/multipart"
+	"net/http"
+	"os"
+	"strconv"
+	"strings"
+	"time"
 )
 
 type MyMux struct {

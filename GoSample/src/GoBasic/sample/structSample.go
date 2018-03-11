@@ -11,13 +11,13 @@ type Human struct {
 	name   string
 	age    int
 	weight int
-	phone string
+	phone  string
 }
 
 type Student struct {
 	Human
 	speciality string
-	school string
+	school     string
 }
 
 func Older(p1, p2 person) (person, int) {

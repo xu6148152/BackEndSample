@@ -3,14 +3,15 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/mattn/go-sqlite3"
-	"time"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
+
 	"github.com/garyburd/redigo/redis"
-	"log"
+	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/mattn/go-sqlite3"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

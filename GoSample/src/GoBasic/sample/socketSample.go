@@ -15,9 +15,9 @@ import (
 	"net/http"
 	"net/rpc"
 
+	"errors"
 	"github.com/gorilla/websocket"
 	"github.com/julienschmidt/httprouter"
-	"errors"
 )
 
 func checkErr1(err error) {
