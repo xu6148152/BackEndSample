@@ -13,4 +13,13 @@
 
     <dubbo:reference id="upmsSystemService" interface="com.binea.upms.rpc.api.UpmsSystemService"/>
 
+    <!-- 组织 -->
+    <dubbo:reference id="upmsOrganizationService" interface="com.binea.upms.rpc.api.UpmsOrganizationService" />
+    <!-- 用户 -->
+    <dubbo:reference id="upmsUserService" interface="com.binea.upms.rpc.api.UpmsUserService" />
+    <!-- 角色 -->
+    <dubbo:reference id="upmsRoleService" interface="com.binea.upms.rpc.api.UpmsRoleService" />
+    <!-- 权限 -->
+    <dubbo:reference id="upmsPermissionService" interface="com.binea.upms.rpc.api.UpmsPermissionService" />
+
 </beans>
