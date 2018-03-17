@@ -4,51 +4,50 @@ import (
 	"fmt"
 
 	"cms/management/editor"
-	"cms/system/db"
 )
 
 // generic content struct
 type Post struct {
-	db.Item
+	Item
 	editor    editor.Editor
-	Title     []byte `json:"title"`
-	Content   []byte `json:"content"`
-	Author    []byte `json:"author"`
-	Timestamp []byte `json:"timestamp"`
+	Title     string `json:"title"`
+	Content   string `json:"content"`
+	Author    string `json:"author"`
+	Timestamp string `json:"timestamp"`
 }
 
 func init() {
-	Types["Post"] = Post{}
+	Types["Post"] = func() interface{} { return new(Post) }
 }
 
-func (p Post) ContentID() int { return p.ID }
+func (p *Post) ContentID() int { return p.ID }
 
-func (p Post) Editor() *editor.Editor { return &p.editor }
+func (p *Post) Editor() *editor.Editor { return &p.editor }
 
-func (p Post) MarshalEditor() ([]byte, error) {
-	view, err := editor.New(&p,
+func (p *Post) MarshalEditor() ([]byte, error) {
+	view, err := editor.New(p,
 		editor.Field{
-			View: editor.Input("Title", &p, map[string]string{
+			View: editor.Input("Title", p, map[string]string{
 				"label":       "Post Title",
 				"type":        "text",
 				"placeholder": "Enter your Post Title here",
 			}),
 		},
 		editor.Field{
-			View: editor.Textarea("Content", &p, map[string]string{
+			View: editor.Textarea("Content", p, map[string]string{
 				"label":       "Content",
 				"placeholder": "Add the content of your post here",
 			}),
 		},
 		editor.Field{
-			View: editor.Input("Author", &p, map[string]string{
+			View: editor.Input("Author", p, map[string]string{
 				"label":       "Author",
 				"type":        "text",
 				"placeholder": "Enter the author name here",
 			}),
 		},
 		editor.Field{
-			View: editor.Input("Timestamp", &p, map[string]string{
+			View: editor.Input("Timestamp", p, map[string]string{
 				"label": "Publish Date",
 				"type":  "date",
 			}),

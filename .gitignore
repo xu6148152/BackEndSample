@@ -7,7 +7,8 @@ binea/cms/cms-dao/target/*
 NettySample/*.iml
 GoSample/pkg/*
 GoSample/bin/*
-GoSample/src/GoBasic/github.com/*
-GoSample/src/GoBasic/gopkg.in/*
+GoSample/src/github.com/*
+GoSample/src/gopkg.in/*
 *.iml
 GoSample/src/hugo/*
+GoSample/src/cms/*.db

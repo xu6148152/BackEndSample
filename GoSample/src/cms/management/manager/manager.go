@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"reflect"
-
 	"cms/management/editor"
 )
 
 var html = `
+<a href="/admin/edit?type={{.Kind}}" class="button">New {{.Kind}}</a>
 <div class="manager">
-    <form method="post" action="/admin/edit?type={{.Kind}}&contentId={{.ID}}">
+    <form method="post" action="/admin/edit">
         {{.Editor}}
+		<input type="hidden" name="id" value="{{.ID}}"/>
+		<input type="hidden" name="type" value="{{.Kind}}"/>
         <input type="submit" value="Save"/>
     </form>
 </div>
@@ -24,7 +25,7 @@ type form struct {
 	Editor template.HTML
 }
 
-func Manage(e editor.Editable) ([]byte, error) {
+func Manage(e editor.Editable, typeName string) ([]byte, error) {
 	v, err := e.MarshalEditor()
 	if err != nil {
 		return nil, fmt.Errorf("Couldn't marshal editor for content %T. %s", e, err.Error())
@@ -32,7 +33,7 @@ func Manage(e editor.Editable) ([]byte, error) {
 
 	f := form{
 		ID:     e.ContentID(),
-		Kind:   reflect.TypeOf(e).Name(),
+		Kind:   typeName,
 		Editor: template.HTML(v),
 	}
 
