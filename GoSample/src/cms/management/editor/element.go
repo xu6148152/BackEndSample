@@ -52,6 +52,7 @@ func domElementSelfClose(e *element, wrapInLabel bool) []byte {
 	for attr, value := range e.Attrs {
 		e.viewBuf.Write([]byte(attr + `="` + string(value) + `"`))
 	}
+	e.viewBuf.Write([]byte(` name="` + e.Name + `"`))
 	e.viewBuf.Write([]byte(` />`))
 
 	return e.viewBuf.Bytes()
@@ -67,6 +68,7 @@ func domElement(e *element, wrapInLabel bool) []byte {
 	for attr, value := range e.Attrs {
 		e.viewBuf.Write([]byte(attr + `="` + string(value) + `"`))
 	}
+	e.viewBuf.Write([]byte(` name="` + e.Name + `"`))
 	e.viewBuf.Write([]byte(` >`))
 
 	e.viewBuf.Write([]byte(e.data))

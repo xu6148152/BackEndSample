@@ -3,9 +3,9 @@ package editor
 import "bytes"
 
 type Editable interface {
+	ContentID() int
 	Editor() *Editor
-	NewViewBuffer()
-	Render() []byte
+	MarshalEditor() ([]byte, error)
 }
 
 type Editor struct {
@@ -17,15 +17,15 @@ type Field struct {
 }
 
 func New(post Editable, fields ...Field) ([]byte, error) {
-	post.NewViewBuffer()
-
 	editor := post.Editor()
+
+	editor.ViewBuf = &bytes.Buffer{}
 
 	for _, f := range fields {
 		addFieldToEditorView(editor, f)
 	}
 
-	return post.Render(), nil
+	return editor.ViewBuf.Bytes(), nil
 }
 
 func addFieldToEditorView(e *Editor, f Field) {

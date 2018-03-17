@@ -1,15 +1,15 @@
-package main
+package content
 
 import (
-	"bytes"
 	"fmt"
-	"net/http"
-	//"github.com/nilslice/cms/editor"
-	"cms/editor"
+
+	"cms/management/editor"
+	"cms/system/db"
 )
 
 // generic content struct
 type Post struct {
+	db.Item
 	editor    editor.Editor
 	Title     []byte `json:"title"`
 	Content   []byte `json:"content"`
@@ -17,19 +17,15 @@ type Post struct {
 	Timestamp []byte `json:"timestamp"`
 }
 
-func (p *Post) Editor() *editor.Editor {
-	return &p.editor
+func init() {
+	Types["Post"] = Post{}
 }
 
-func (p *Post) NewViewBuffer() {
-	p.editor.ViewBuf = &bytes.Buffer{}
-}
+func (p Post) ContentID() int { return p.ID }
 
-func (p *Post) Render() []byte {
-	return p.editor.ViewBuf.Bytes()
-}
+func (p Post) Editor() *editor.Editor { return &p.editor }
 
-func (p Post) EditView() ([]byte, error) {
+func (p Post) MarshalEditor() ([]byte, error) {
 	view, err := editor.New(&p,
 		editor.Field{
 			View: editor.Input("Title", &p, map[string]string{
@@ -64,24 +60,4 @@ func (p Post) EditView() ([]byte, error) {
 	}
 
 	return view, nil
-}
-
-func (p Post) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	res.Header().Set("Content-type", "text/html")
-	resp, err := p.EditView()
-	if err != nil {
-		fmt.Println(err)
-	}
-	res.Write(resp)
-}
-
-func main() {
-	p := Post{
-		Content:   []byte("<h3>H</h3>ello. My name is <em>Binea</em>."),
-		Title:     []byte("Profound introduction"),
-		Author:    []byte("Binea Xu"),
-		Timestamp: []byte("2018-03-11"),
-	}
-
-	http.ListenAndServe(":8080", p)
 }
