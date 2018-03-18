@@ -20,14 +20,26 @@ func init() {
 	Types["Post"] = func() interface{} { return new(Post) }
 }
 
+func (p *Post) SetContentID(id int) { p.ID = id }
+
 func (p *Post) ContentID() int { return p.ID }
 
 func (p *Post) ContentName() string { return p.Title }
 
+func (p *Post) SetSlug(slug string) { p.Slug = slug }
+
 func (p *Post) Editor() *editor.Editor { return &p.editor }
 
 func (p *Post) MarshalEditor() ([]byte, error) {
-	view, err := editor.New(p,
+	view, err := editor.Form(p,
+		editor.Field{
+			View: editor.Input("Slug", p, map[string]string{
+				"label":       "URL Path",
+				"type":        "text",
+				"disabled":    "true",
+				"placeholder": "Will be set automatically",
+			}),
+		},
 		editor.Field{
 			View: editor.Input("Title", p, map[string]string{
 				"label":       "Post Title",

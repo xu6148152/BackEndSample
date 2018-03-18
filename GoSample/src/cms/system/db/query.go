@@ -14,6 +14,8 @@ import (
 
 	"github.com/boltdb/bolt"
 	"github.com/gorilla/schema"
+	"cms/management/editor"
+	"cms/management/manager"
 )
 
 var store *bolt.DB
@@ -28,12 +30,22 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	store.Update(func(tx *bolt.Tx) error {
+		for t := range content.Types {
+			_, err := tx.CreateBucketIfNotExists([]byte(t))
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+	})
 }
 
 func Set(target string, data url.Values) (int, error) {
 	t := strings.Split(target, ":")
 	ns, id := t[0], t[1]
-	if len(id) == 0 {
+	if id == "-1" {
 		return insert(ns, data)
 	}
 	return update(ns, id, data)
@@ -125,6 +137,11 @@ func toJSON(ns string, data url.Values) ([]byte, error) {
 		return nil, err
 	}
 
+	slug, err := manager.Slug(post.(editor.Editable))
+	if err != nil {
+		return nil, err
+	}
+	post.(editor.Editable).SetSlug(slug)
 	j, err := json.Marshal(post)
 	if err != nil {
 		return nil, err

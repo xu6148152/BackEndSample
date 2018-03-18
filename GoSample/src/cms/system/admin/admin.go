@@ -5,12 +5,24 @@ import (
 	"html/template"
 
 	"cms/content"
+	"fmt"
 )
 
 const adminHTML = `<!doctype html>
 <html>
     <head>
         <title>CMS</title>
+        <style type="text/css">
+            label {
+                display: block;
+                margin-top: 11px;
+            }
+            input {
+                display: block;
+                margin-bottom: 11px;
+                padding: 2px;
+            }
+        </style>
     </head>
     <body>
         <h1><a href="/admin">CMS</a></h1>
@@ -39,7 +51,7 @@ func Admin(manager []byte) []byte {
 		Types:   content.Types,
 		Subview: template.HTML(manager),
 	}
-
+	fmt.Println(a.Types)
 	buf := &bytes.Buffer{}
 	tmpl := template.Must(template.New("admin").Parse(adminHTML))
 	tmpl.Execute(buf, a)

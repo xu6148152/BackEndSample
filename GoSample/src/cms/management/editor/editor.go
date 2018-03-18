@@ -3,7 +3,9 @@ package editor
 import "bytes"
 
 type Editable interface {
+	SetContentID(id int)
 	ContentName() string
+	SetSlug(slug string)
 	ContentID() int
 	Editor() *Editor
 	MarshalEditor() ([]byte, error)
@@ -17,7 +19,7 @@ type Field struct {
 	View []byte
 }
 
-func New(post Editable, fields ...Field) ([]byte, error) {
+func Form(post Editable, fields ...Field) ([]byte, error) {
 	editor := post.Editor()
 
 	editor.ViewBuf = &bytes.Buffer{}

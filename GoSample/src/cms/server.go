@@ -29,7 +29,7 @@ func init() {
 `
 )
 
-func main() {
+func init() {
 	http.HandleFunc("/admin", func(res http.ResponseWriter, req *http.Request) {
 		adminView := admin.Admin(nil)
 		res.Header().Set("Cotent-Type", "text/html")
@@ -98,6 +98,8 @@ func main() {
 					return
 				}
 
+			} else {
+				post.(editor.Editable).SetContentID(-1)
 			}
 
 			m, err := manager.Manage(post.(editor.Editable), t)
@@ -127,6 +129,4 @@ func main() {
 			http.Redirect(res, req, desURL, http.StatusFound)
 		}
 	})
-
-	http.ListenAndServe(":8080", nil)
 }
