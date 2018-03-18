@@ -11,7 +11,7 @@ import (
 )
 
 func Slug(e editor.Editable) (string, error) {
-	name := e.ContentName()
+	name := strings.TrimSpace(e.ContentName())
 
 	// filter out non-alphanumeric character or non-whitespace
 	slug, err := stringToSlug(name)

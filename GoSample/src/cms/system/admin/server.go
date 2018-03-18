@@ -1,4 +1,4 @@
-package main
+package admin
 
 import (
 	"bytes"
@@ -10,7 +10,6 @@ import (
 	"cms/management/manager"
 	"cms/management/editor"
 	"cms/system/db"
-	"cms/system/admin"
 )
 
 const (
@@ -31,7 +30,7 @@ func init() {
 
 func init() {
 	http.HandleFunc("/admin", func(res http.ResponseWriter, req *http.Request) {
-		adminView := admin.Admin(nil)
+		adminView := Admin(nil)
 		res.Header().Set("Cotent-Type", "text/html")
 		res.Write(adminView)
 	})
@@ -60,7 +59,7 @@ func init() {
 
 		html += b.String()
 
-		adminView := admin.Admin([]byte(html))
+		adminView := Admin([]byte(html))
 
 		res.Header().Set("Content-Type", "text/html")
 		res.Write(adminView)
@@ -103,7 +102,7 @@ func init() {
 			}
 
 			m, err := manager.Manage(post.(editor.Editable), t)
-			adminView := admin.Admin(m)
+			adminView := Admin(m)
 			if err != nil {
 				fmt.Println(err)
 				res.WriteHeader(http.StatusInternalServerError)

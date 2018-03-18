@@ -22,7 +22,7 @@ var store *bolt.DB
 
 const dbPath string = "/GoSample/src/cms/"
 
-func init() {
+func Init() {
 	pwd, _ := os.Getwd()
 
 	var err error

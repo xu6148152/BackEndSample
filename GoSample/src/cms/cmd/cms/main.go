@@ -4,7 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"net/http"
+
+	"cms/system/api"
+	"cms/system/db"
 )
 
 var usage = `
@@ -32,7 +34,7 @@ func main() {
 
 	args := flag.Args()
 	if len(args) < 1 {
-		flag.PrintDefaults()
+		flag.Usage()
 		os.Exit(0)
 	}
 
@@ -60,14 +62,11 @@ func main() {
 			os.Exit(1)
 		}
 	case "serve", "s":
-		serve()
+		db.Init()
+		api.Run("8080")
 	case "":
 		flag.PrintDefaults()
 	default:
 		flag.PrintDefaults()
 	}
-}
-
-func serve() {
-	http.ListenAndServe(":8080", nil)
 }
