@@ -1,11 +1,13 @@
 package cms
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
 	"os"
 	"path/filepath"
 	"strings"
+	"os/exec"
 )
 
 func generateContentType(name string) error {
@@ -142,3 +144,98 @@ func ({{ .initial }} *{{ .name }}) MarshalEditor() ([]byte, error) {
 */
 }
 `
+
+func newProjectInDir(path string) error {
+	// check if anything exists at the path, ask if it should be overwritten
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		fmt.Println("Path exists, overwrite contents? (y/N):")
+		// input := bufio.NewReader(os.Stdin)
+		// answer, err := input.ReadString('\n')
+
+		var answer string
+		_, err := fmt.Scanf("%s\n", &answer)
+		if err != nil {
+			return err
+		}
+
+		answer = strings.ToLower(answer)
+
+		switch answer {
+		case "n", "no", "":
+			fmt.Println("")
+
+		case "y", "yes":
+			err := os.RemoveAll(path)
+			if err != nil {
+				return fmt.Errorf("Failed to overwrite %s. \n%s", path, err)
+			}
+
+			return createProjInDir(path)
+
+		default:
+			fmt.Println("Input not recognized. No files overwritten. Answer as 'y' or 'n' only.")
+		}
+
+		return nil
+	}
+
+	return createProjInDir(path)
+}
+
+func createProjInDir(path string) error {
+	var buf = &bytes.Buffer{}
+	echo := exec.Command("echo", os.Getenv("GOPATH"))
+	echo.Stdout = buf
+	err := echo.Run()
+	if err != nil {
+		return err
+	}
+
+	gopath := buf.String()
+	gopath = gopath[:len(gopath)-1]
+	gopath = filepath.Join(gopath, "src")
+
+	//repo := ""
+	//local := filepath.Join(gopath, repo)
+	//network := "https://" + repo + ".git"
+	local := ""
+	network := ""
+	// create the directory or overwrite it
+	err = os.MkdirAll(path, os.ModeDir|os.ModePerm)
+	if err != nil {
+		return err
+	}
+
+	// try to git clone the repository from the local machine's $GOPATH
+	localClone := exec.Command("git", "clone", local, path)
+	localClone.Stdout = os.Stdout
+	localClone.Stderr = os.Stderr
+
+	err = localClone.Start()
+	if err != nil {
+		return err
+	}
+	err = localClone.Wait()
+	if err != nil {
+		fmt.Println("Couldn't clone from", local, ". Trying network...")
+
+		// try to git clone the repository over the network
+		networkClone := exec.Command("git", "clone", network, path)
+		networkClone.Stdout = os.Stdout
+		networkClone.Stderr = os.Stderr
+		err = networkClone.Start()
+		if err != nil {
+			fmt.Println("Network clone failed to start. Try again and make sure you have a network connection.")
+			return err
+		}
+		err = networkClone.Wait()
+		if err != nil {
+			fmt.Println("Network clone failure.")
+			// failed
+			return fmt.Errorf("Failed to clone files from local machine [%s] and over the network [%s].\n%s", local, network, err)
+		}
+	}
+
+	fmt.Println("New project created at", path)
+	return nil
+}
