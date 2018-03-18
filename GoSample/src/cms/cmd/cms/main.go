@@ -38,21 +38,31 @@ func main() {
 
 	fmt.Println(args)
 	switch args[0] {
+	case "new":
+		if len(args) < 2 {
+			flag.PrintDefaults()
+			os.Exit(0)
+		}
+		err := newProjectInDir(args[1])
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 	case "generate", "gen", "g":
 		if len(args) < 2 {
 			flag.PrintDefaults()
 			os.Exit(0)
 		}
 
-		name := args[1]
-
-		err := generateContentType(name)
+		err := generateContentType(args[1])
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
 	case "serve", "s":
 		serve()
+	case "":
+		flag.PrintDefaults()
 	default:
 		flag.PrintDefaults()
 	}
