@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
 	"encoding/json"
@@ -9,6 +10,7 @@ import (
 	"cms/management/manager"
 	"cms/management/editor"
 	"cms/system/db"
+	"cms/system/admin"
 )
 
 const (
@@ -28,6 +30,41 @@ func init() {
 )
 
 func main() {
+	http.HandleFunc("/admin", func(res http.ResponseWriter, req *http.Request) {
+		adminView := admin.Admin(nil)
+		res.Header().Set("Cotent-Type", "text/html")
+		res.Write(adminView)
+	})
+
+	http.HandleFunc("/admin/posts", func(res http.ResponseWriter, req *http.Request) {
+		q := req.URL.Query()
+		t := q.Get("type")
+		if t == "" {
+			res.WriteHeader(http.StatusBadRequest)
+		}
+
+		posts := db.GetAll(t)
+		b := &bytes.Buffer{}
+		p := content.Types[t]().(editor.Editable)
+
+		html := `<a href="/admin/edit?type=` + t + `" class="button">New ` + t + `</a>
+			<ul class="posts">`
+
+		for i := range posts {
+			json.Unmarshal(posts[i], &p)
+			post := `<li><a href="/admin/edit?type=` +
+				t + `&id=` + fmt.Sprintf("%d", p.ContentID()) +
+				`">` + p.ContentName() + `</a></li>`
+			b.Write([]byte(post))
+		}
+
+		html += b.String()
+
+		adminView := admin.Admin([]byte(html))
+
+		res.Header().Set("Content-Type", "text/html")
+		res.Write(adminView)
+	})
 	http.HandleFunc("/admin/edit", func(res http.ResponseWriter, req *http.Request) {
 		err := req.ParseForm()
 		if err != nil {
@@ -47,7 +84,6 @@ func main() {
 			post := contentType()
 
 			if i != "" {
-				fmt.Println("Need to show post id:", i, "(", t, ")")
 				data, err := db.Get(t + ":" + i)
 				if err != nil {
 					fmt.Println(err)
@@ -64,19 +100,18 @@ func main() {
 
 			}
 
-			view, err := manager.Manage(post.(editor.Editable), t)
+			m, err := manager.Manage(post.(editor.Editable), t)
+			adminView := admin.Admin(m)
 			if err != nil {
 				fmt.Println(err)
 				res.WriteHeader(http.StatusInternalServerError)
 				return
 			}
 			res.Header().Set("Content-Type", "text/html")
-			res.Write(view)
+			res.Write(adminView)
 		case http.MethodPost:
 			cid := req.FormValue("id")
 			t := req.FormValue("type")
-			fmt.Println("query data: t=", t, "id=", cid)
-
 			id, err := db.Set(t+":"+cid, req.PostForm)
 			if err != nil {
 				fmt.Println(err)
@@ -84,11 +119,11 @@ func main() {
 				return
 			}
 
-			fmt.Println(t, "post created:", id)
 			scheme := req.URL.Scheme
 			host := req.URL.Host
 			path := req.URL.Path
-			desURL := scheme + host + path + "?type=" + t + "&id=" + fmt.Sprintf("%d", id)
+			sid := fmt.Sprintf("%d", id)
+			desURL := scheme + host + path + "?type=" + t + "&id=" + sid
 			http.Redirect(res, req, desURL, http.StatusFound)
 		}
 	})

@@ -22,6 +22,8 @@ func init() {
 
 func (p *Post) ContentID() int { return p.ID }
 
+func (p *Post) ContentName() string { return p.Title }
+
 func (p *Post) Editor() *editor.Editor { return &p.editor }
 
 func (p *Post) MarshalEditor() ([]byte, error) {

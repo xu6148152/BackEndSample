@@ -7,9 +7,9 @@ import (
 	"cms/management/editor"
 )
 
-var html = `
+const managerHTML = `
 <a href="/admin/edit?type={{.Kind}}" class="button">New {{.Kind}}</a>
-<div class="manager">
+<div class="editor">
     <form method="post" action="/admin/edit">
         {{.Editor}}
 		<input type="hidden" name="id" value="{{.ID}}"/>
@@ -19,7 +19,7 @@ var html = `
 </div>
 `
 
-type form struct {
+type manager struct {
 	ID     int
 	Kind   string
 	Editor template.HTML
@@ -31,14 +31,14 @@ func Manage(e editor.Editable, typeName string) ([]byte, error) {
 		return nil, fmt.Errorf("Couldn't marshal editor for content %T. %s", e, err.Error())
 	}
 
-	f := form{
+	f := manager{
 		ID:     e.ContentID(),
 		Kind:   typeName,
 		Editor: template.HTML(v),
 	}
 
 	buf := &bytes.Buffer{}
-	tmpl := template.Must(template.New("manager").Parse(html))
+	tmpl := template.Must(template.New("manager").Parse(managerHTML))
 	tmpl.Execute(buf, f)
 
 	return buf.Bytes(), nil

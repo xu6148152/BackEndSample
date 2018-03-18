@@ -154,5 +154,18 @@ func Get(target string) ([]byte, error) {
 }
 
 func GetAll(namespace string) [][]byte {
-	return nil
+	var posts [][]byte
+	store.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(namespace))
+		len := b.Stats().KeyN
+		posts = make([][]byte, 0, len)
+
+		b.ForEach(func(k, v []byte) error {
+			posts = append(posts, v)
+			return nil
+		})
+
+		return nil
+	})
+	return posts
 }

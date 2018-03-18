@@ -3,6 +3,7 @@ package editor
 import "bytes"
 
 type Editable interface {
+	ContentName() string
 	ContentID() int
 	Editor() *Editor
 	MarshalEditor() ([]byte, error)
