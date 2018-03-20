@@ -2,11 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.binea</groupId>
     <artifactId>binea-common</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-
+    <parent>
+        <groupId>com.binea</groupId>
+        <artifactId>binea</artifactId>
+        <version>1.0.0</version>
+    </parent>
     <name>binea-common</name>
     <url></url>
 
@@ -342,6 +345,14 @@
                     <!--是否忽略单元测试错误-->
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

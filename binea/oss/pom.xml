@@ -2,7 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.binea</groupId>
     <artifactId>oss</artifactId>
     <version>1.0.0</version>
     <modules>
@@ -10,7 +9,11 @@
         <module>oss-web</module>
     </modules>
     <packaging>pom</packaging>
-
+    <parent>
+        <artifactId>binea</artifactId>
+        <groupId>com.binea</groupId>
+        <version>1.0.0</version>
+    </parent>
     <name>oss</name>
 
     <properties>

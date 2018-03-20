@@ -18,7 +18,7 @@
     </properties>
 
     <modules>
-        <module>qa-dao</module>
-        <module>qa-service</module>
+        <module>binea-qa-dao</module>
+        <module>binea-qa-service</module>
     </modules>
 </project>
