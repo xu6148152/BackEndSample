@@ -10,6 +10,7 @@ import (
 	"cms/management/manager"
 	"cms/management/editor"
 	"cms/system/db"
+	"strings"
 )
 
 const (
@@ -113,6 +114,25 @@ func init() {
 		case http.MethodPost:
 			cid := req.FormValue("id")
 			t := req.FormValue("type")
+
+			var discardKeys []string
+			for k, v := range req.PostForm {
+				if strings.Contains(k, ".") {
+					key := strings.Split(k, ".")[0]
+
+					if req.PostForm.Get(key) == "" {
+						req.PostForm.Set(key, v[0])
+						discardKeys = append(discardKeys, k)
+					} else {
+						req.PostForm.Add(key, v[0])
+					}
+				}
+			}
+
+			for _, discardKey := range discardKeys {
+				req.PostForm.Del(discardKey)
+			}
+
 			id, err := db.Set(t+":"+cid, req.PostForm)
 			if err != nil {
 				fmt.Println(err)
