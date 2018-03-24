@@ -51,15 +51,17 @@ type admin struct {
 	Subview template.HTML
 }
 
-func Admin(manager []byte) []byte {
+func Admin(view []byte) ([]byte, error) {
 	a := admin{
 		Types:   content.Types,
-		Subview: template.HTML(manager),
+		Subview: template.HTML(view),
 	}
 	fmt.Println(a.Types)
 	buf := &bytes.Buffer{}
 	tmpl := template.Must(template.New("admin").Parse(adminHTML))
-	tmpl.Execute(buf, a)
-
-	return buf.Bytes()
+	err := tmpl.Execute(buf, a)
+	if err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
 }

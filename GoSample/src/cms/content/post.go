@@ -9,11 +9,12 @@ import (
 // generic content struct
 type Post struct {
 	Item
-	editor    editor.Editor
-	Title     string `json:"title"`
-	Content   string `json:"content"`
-	Author    string `json:"author"`
-	Timestamp string `json:"timestamp"`
+	editor     editor.Editor
+	Title      string `json:"title"`
+	Content    string `json:"content"`
+	Author     string `json:"author"`
+	Category   string `json:"category"`
+	ThemeStyle string `json:"theme"`
 }
 
 func init() {
@@ -33,11 +34,20 @@ func (p *Post) Editor() *editor.Editor { return &p.editor }
 func (p *Post) MarshalEditor() ([]byte, error) {
 	view, err := editor.Form(p,
 		editor.Field{
-			View: editor.Input("Slug", p, map[string]string{
-				"label":       "URL Path",
-				"type":        "text",
-				"disabled":    "true",
-				"placeholder": "Will be set automatically",
+			View: editor.Checkbox("Category", p, map[string]string{
+				"label": "Post Category",
+			}, map[string]string{
+				"important": "Important",
+				"active":    "Active",
+				"unplanned": "Unplanned",
+			}),
+		},
+		editor.Field{
+			View: editor.Select("ThemeStyle", p, map[string]string{
+				"label": "Theme Style",
+			}, map[string]string{
+				"dark":  "Dark",
+				"light": "Light",
 			}),
 		},
 		editor.Field{
@@ -58,12 +68,6 @@ func (p *Post) MarshalEditor() ([]byte, error) {
 				"label":       "Author",
 				"type":        "text",
 				"placeholder": "Enter the author name here",
-			}),
-		},
-		editor.Field{
-			View: editor.Input("Timestamp", p, map[string]string{
-				"label": "Publish Date",
-				"type":  "date",
 			}),
 		},
 	)

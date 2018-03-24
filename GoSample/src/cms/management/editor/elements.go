@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"reflect"
 	"fmt"
+	"strings"
 )
 
 type element struct {
@@ -17,7 +18,7 @@ type element struct {
 
 func Select(fieldName string, p interface{}, attrs, options map[string]string) []byte {
 	fieldVal := valueFromStructField(fieldName, p).String()
-
+	attrs["class"] = "browser-default"
 	sel := newElement("select", attrs["label"], fieldName, p, attrs)
 	var opts []*element
 
@@ -36,33 +37,29 @@ func Select(fieldName string, p interface{}, attrs, options map[string]string) [
 
 	opts = append(opts, cta, reset)
 
-	var val string
 	for k, v := range options {
+		optAttrs := map[string]string{"value": k}
 		if k == fieldVal {
-			val = "true"
+			optAttrs["selected"] = "true"
 		} else {
-			val = "false"
+			optAttrs["selected"] = "false"
 		}
 
 		opt := &element{
 			TagName: "option",
-			Attrs:   map[string]string{"value": k, "selected": val},
+			Attrs:   optAttrs,
 			data:    v,
 			viewBuf: &bytes.Buffer{},
-		}
-
-		if val == "true" {
-			delete(opt.Attrs, "selected")
 		}
 
 		opts = append(opts, opt)
 	}
 
-	return domElementWithChildren(sel, opts)
+	return domElementWithChildrenSelect(sel, opts)
 }
 
 func Checkbox(fieldName string, p interface{}, attrs, options map[string]string) []byte {
-
+	attrs["class"] = "input-field col s12"
 	div := newElement("div", attrs["label"], "", p, attrs)
 	var opts []*element
 
@@ -72,11 +69,15 @@ func Checkbox(fieldName string, p interface{}, attrs, options map[string]string)
 
 	i := 0
 	for k, v := range options {
+		inputAttrs := map[string]string{
+			"type":  "checkbox",
+			"value": k,
+			"id":    strings.Join(strings.Split(v, " "), "-"),
+		}
 		// check if k is in the pre-checked values and set to checked
-		var val string
 		for _, x := range checked {
 			if k == x {
-				val = "true"
+				inputAttrs["checked"] = "checked"
 			}
 		}
 
@@ -84,20 +85,11 @@ func Checkbox(fieldName string, p interface{}, attrs, options map[string]string)
 		// func since this is for a multi-value name
 		input := &element{
 			TagName: "input",
-			Attrs: map[string]string{
-				"type":    "checkbox",
-				"checked": val,
-				"value":   k,
-			},
+			Attrs:   inputAttrs,
 			Name:    tagNameFromStructFieldMulti(fieldName, i, p),
 			label:   v,
 			data:    "",
 			viewBuf: &bytes.Buffer{},
-		}
-
-		// if checked == false, delete it from input.Attrs for clarity
-		if input.Attrs["checked"] == "" {
-			delete(input.Attrs, "checked")
 		}
 
 		opts = append(opts, input)
@@ -122,8 +114,9 @@ func Textarea(fieldName string, p interface{}, attrs map[string]string) []byte {
 // domElementSelfClose is a special DOM element which is parsed as a
 // self-closing tag and thus needs to be created differently
 func domElementSelfClose(e *element) []byte {
+	e.viewBuf.Write([]byte(`<div class="input-field col s12">`))
 	if e.label != "" {
-		e.viewBuf.Write([]byte(`<label>` + e.label))
+		e.viewBuf.Write([]byte(`<label class="active" for="` + strings.Join(strings.Split(e.label, " "), "-") + `">` + e.label + `</label>`))
 	}
 	e.viewBuf.Write([]byte(`<` + e.TagName + ` value="`))
 	e.viewBuf.Write([]byte(e.data + `" `))
@@ -134,9 +127,7 @@ func domElementSelfClose(e *element) []byte {
 	e.viewBuf.Write([]byte(` name="` + e.Name + `"`))
 	e.viewBuf.Write([]byte(` />`))
 
-	if e.label != "" {
-		e.viewBuf.Write([]byte(`</label>`))
-	}
+	e.viewBuf.Write([]byte(`</div>`))
 
 	return e.viewBuf.Bytes()
 }
@@ -144,9 +135,9 @@ func domElementSelfClose(e *element) []byte {
 // domElementCheckbox is a special DOM element which is parsed as a
 // checkbox input tag and thus needs to be created differently
 func domElementCheckbox(e *element) []byte {
-	if e.label != "" {
-		e.viewBuf.Write([]byte(`<label>`))
-	}
+
+	e.viewBuf.Write([]byte(`<p class="col s6">`))
+
 	e.viewBuf.Write([]byte(`<` + e.TagName + ` `))
 
 	for attr, value := range e.Attrs {
@@ -156,16 +147,19 @@ func domElementCheckbox(e *element) []byte {
 	e.viewBuf.Write([]byte(` /> `))
 
 	if e.label != "" {
-		e.viewBuf.Write([]byte(e.label + `</label>`))
+		e.viewBuf.Write([]byte(`<label for="` + strings.Join(strings.Split(e.label, " "), "-") + `">` + e.label + `</label>`))
 	}
 
+	e.viewBuf.Write([]byte(`</p>`))
 	return e.viewBuf.Bytes()
 }
 
 // domElement creates a DOM element
 func domElement(e *element) []byte {
+	e.viewBuf.Write([]byte(`<div class="input-field col s12">`))
+
 	if e.label != "" {
-		e.viewBuf.Write([]byte(`<label>` + e.label))
+		e.viewBuf.Write([]byte(`<label class="active" for="` + strings.Join(strings.Split(e.label, " "), "-") + `">` + e.label + `</label>`))
 	}
 	e.viewBuf.Write([]byte(`<` + e.TagName + ` `))
 
@@ -178,18 +172,19 @@ func domElement(e *element) []byte {
 	e.viewBuf.Write([]byte(e.data))
 	e.viewBuf.Write([]byte(`</` + e.TagName + `>`))
 
-	if e.label != "" {
-		e.viewBuf.Write([]byte(`</label>`))
-	}
+	e.viewBuf.Write([]byte(`</div>`))
 
 	return e.viewBuf.Bytes()
 }
 
-func domElementWithChildren(e *element, children []*element) []byte {
+func domElementWithChildrenSelect(e *element, children []*element) []byte {
+	e.viewBuf.Write([]byte(`<div class="input-field col s6">`))
+
 	if e.label != "" {
-		e.viewBuf.Write([]byte(`<label>` + e.label))
+		e.viewBuf.Write([]byte(`<label class="active">` + e.label + `</label>`))
 	}
-	e.viewBuf.Write([]byte(`<` + e.TagName + ` `))
+
+	e.viewBuf.Write([]byte(`</div>`))
 
 	for attr, value := range e.Attrs {
 		e.viewBuf.Write([]byte(attr + `="` + string(value) + `" `))
@@ -211,27 +206,23 @@ func domElementWithChildren(e *element, children []*element) []byte {
 }
 
 func domElementWithChildrenCheckbox(e *element, children []*element) []byte {
-	if e.label != "" {
-		e.viewBuf.Write([]byte(`<label>` + e.label))
-	}
 	e.viewBuf.Write([]byte(`<` + e.TagName + ` `))
 
 	for attr, value := range e.Attrs {
 		e.viewBuf.Write([]byte(attr + `="` + value + `" `))
 	}
-	e.viewBuf.Write([]byte(` name="` + e.Name + `"`))
 	e.viewBuf.Write([]byte(` >`))
+
+	if e.label != "" {
+		e.viewBuf.Write([]byte(`<label class="active">` + e.label + `</label>`))
+	}
 
 	// loop over children and create domElement for each child
 	for _, child := range children {
 		e.viewBuf.Write(domElementCheckbox(child))
 	}
 
-	e.viewBuf.Write([]byte(`</` + e.TagName + `>`))
-
-	if e.label != "" {
-		e.viewBuf.Write([]byte(`</label>`))
-	}
+	e.viewBuf.Write([]byte(`</` + e.TagName + `><div class="clear padding">&nbsp;</div>`))
 
 	return e.viewBuf.Bytes()
 }
