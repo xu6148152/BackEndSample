@@ -4,50 +4,33 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/url"
-	"os"
 	"strconv"
 	"strings"
 
-	"cms/content"
-
 	"github.com/boltdb/bolt"
 	"github.com/gorilla/schema"
+	"cms/content"
 	"cms/management/editor"
 	"cms/management/manager"
 )
 
-var store *bolt.DB
-
-const dbPath string = "/GoSample/src/cms/"
-
-func Init() {
-	pwd, _ := os.Getwd()
-
-	var err error
-	store, err = bolt.Open(pwd+dbPath+"store.db", 0666, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	store.Update(func(tx *bolt.Tx) error {
-		for t := range content.Types {
-			_, err := tx.CreateBucketIfNotExists([]byte(t))
-			if err != nil {
-				return err
-			}
-		}
-		return nil
-	})
-}
-
-func Set(target string, data url.Values) (int, error) {
+// SetContent inserts or updates values in the database.
+// The `target` argument is a string made up of namespace:id (string:int)
+func SetContent(target string, data url.Values) (int, error) {
 	t := strings.Split(target, ":")
 	ns, id := t[0], t[1]
+
+	// check if content id == -1 (indicating new post).
+	// if so, run an insert which will assign the next auto incremented int.
+	// this is done because boltdb begins its bucket auto increment value at 0,
+	// which is the zero-value of an int in the Item struct field for ID.
+	// this is a problem when the original first post (with auto ID = 0) gets
+	// overwritten by any new post, originally having no ID, defauting to 0.
 	if id == "-1" {
 		return insert(ns, data)
 	}
+
 	return update(ns, id, data)
 }
 
@@ -63,7 +46,7 @@ func update(ns, id string, data url.Values) (int, error) {
 			return err
 		}
 
-		j, err := toJSON(ns, data)
+		j, err := postToJSON(ns, data)
 		if err != nil {
 			return err
 		}
@@ -72,6 +55,7 @@ func update(ns, id string, data url.Values) (int, error) {
 		if err != nil {
 			return err
 		}
+
 		return nil
 	})
 	if err != nil {
@@ -89,20 +73,20 @@ func insert(ns string, data url.Values) (int, error) {
 			return err
 		}
 
+		// get the next available ID and convert to string
+		// also set effectedID to int of ID
 		id, err := b.NextSequence()
 		if err != nil {
 			return err
 		}
-
 		cid := strconv.FormatUint(id, 10)
 		effectedID, err = strconv.Atoi(cid)
 		if err != nil {
 			return err
 		}
-
 		data.Add("id", cid)
 
-		j, err := toJSON(ns, data)
+		j, err := postToJSON(ns, data)
 		if err != nil {
 			return err
 		}
@@ -114,7 +98,6 @@ func insert(ns string, data url.Values) (int, error) {
 
 		return nil
 	})
-
 	if err != nil {
 		return 0, err
 	}
@@ -122,7 +105,8 @@ func insert(ns string, data url.Values) (int, error) {
 	return effectedID, nil
 }
 
-func toJSON(ns string, data url.Values) ([]byte, error) {
+func postToJSON(ns string, data url.Values) ([]byte, error) {
+	// find the content type and decode values into it
 	t, ok := content.Types[ns]
 	if !ok {
 		return nil, fmt.Errorf(content.ErrTypeNotRegistered, ns)
@@ -130,8 +114,8 @@ func toJSON(ns string, data url.Values) ([]byte, error) {
 	post := t()
 
 	dec := schema.NewDecoder()
-	dec.SetAliasTag("json")
-	dec.IgnoreUnknownKeys(true)
+	dec.SetAliasTag("json")     // allows simpler struct tagging when creating a content type
+	dec.IgnoreUnknownKeys(true) // will skip over form values submitted, but not in struct
 	err := dec.Decode(post, data)
 	if err != nil {
 		return nil, err
@@ -142,6 +126,8 @@ func toJSON(ns string, data url.Values) ([]byte, error) {
 		return nil, err
 	}
 	post.(editor.Editable).SetSlug(slug)
+
+	// marshall content struct to json for db storage
 	j, err := json.Marshal(post)
 	if err != nil {
 		return nil, err
@@ -150,19 +136,23 @@ func toJSON(ns string, data url.Values) ([]byte, error) {
 	return j, nil
 }
 
-func Get(target string) ([]byte, error) {
+// Content retrives one item from the database. Non-existent values will return an empty []byte
+// The `target` argument is a string made up of namespace:id (string:int)
+func Content(target string) ([]byte, error) {
 	t := strings.Split(target, ":")
 	ns, id := t[0], t[1]
+
 	val := &bytes.Buffer{}
 	err := store.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(ns))
 		_, err := val.Write(b.Get([]byte(id)))
 		if err != nil {
+			fmt.Println(err)
 			return err
 		}
+
 		return nil
 	})
-
 	if err != nil {
 		return nil, err
 	}
@@ -170,19 +160,23 @@ func Get(target string) ([]byte, error) {
 	return val.Bytes(), nil
 }
 
-func GetAll(namespace string) [][]byte {
+// ContentAll retrives all items from the database within the provided namespace
+func ContentAll(namespace string) [][]byte {
 	var posts [][]byte
 	store.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(namespace))
+
 		len := b.Stats().KeyN
 		posts = make([][]byte, 0, len)
 
 		b.ForEach(func(k, v []byte) error {
 			posts = append(posts, v)
+
 			return nil
 		})
 
 		return nil
 	})
+
 	return posts
 }

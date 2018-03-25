@@ -5,6 +5,7 @@ import (
 	"reflect"
 	"fmt"
 	"strings"
+	"html"
 )
 
 type element struct {
@@ -265,6 +266,76 @@ func newElement(tagName, label, fieldName string, p interface{}, attrs map[strin
 	}
 }
 
+func File(fieldName string, p interface{}, attrs map[string]string) []byte {
+	name := tagNameFromStructField(fieldName, p)
+	tmpl :=
+		`<div class="file-input ` + name + ` input-field col s12">
+			<label class="active">` + attrs["label"] + `</label>
+			<div class="file-field input-field">
+				<div class="btn">
+					<span>Upload</span>
+					<input class="upload" type="file">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+			<div class="preview"><div class="img-clip"></div></div>
+			<input class="store ` + name + `" type="hidden" name="` + name + `" value="` + valueFromStructField(fieldName, p).String() + `" />
+		</div>`
+
+	script :=
+		`<script>
+			$(function() {
+				var $file = $('.file-input.` + name + `'),
+					upload = $file.find('input.upload'),
+					store = $file.find('input.store'),
+					preview = $file.find('.preview'),
+					clip = preview.find('.img-clip'),
+					reset = document.createElement('div'),
+					img = document.createElement('img'),
+					uploadSrc = store.val();
+					preview.hide();
+
+				// when ` + name + ` input changes (file is selected), remove
+				// the 'name' and 'value' attrs from the hidden store input.
+				// add the 'name' attr to ` + name + ` input
+				upload.on('change', function(e) {
+					resetImage();
+				});
+
+				if (uploadSrc.length > 0) {
+					$(img).attr('src', store.val());
+					clip.append(img);
+					preview.show();
+
+					$(reset).addClass('reset ` + name + ` btn waves-effect waves-light grey');
+					$(reset).html('<i class="material-icons tiny">clear<i>');
+					$(reset).on('click', function(e) {
+						e.preventDefault();
+						preview.animate({"opacity": 0.1}, 200, function() {
+							preview.slideUp(250, function() {
+								resetImage();
+							});
+						})
+
+					});
+					clip.append(reset);
+				}
+
+				function resetImage() {
+					store.val('');
+					store.attr('name', '');
+					upload.attr('name', '` + name + `');
+					clip.empty();
+					console.log('clicked');
+				}
+			});
+		</script>`
+
+	return []byte(tmpl + script)
+}
+
 // Richtext returns the []byte of a rich text editor (provided by http://summernote.org/) with a label.
 // IMPORTANT:
 // The `fieldName` argument will cause a panic if it is not exactly the string
@@ -289,7 +360,7 @@ func Richtext(fieldName string, p interface{}, attrs map[string]string) []byte {
 	// create a hidden input to store the value from the struct
 	val := valueFromStructField(fieldName, p).String()
 	name := tagNameFromStructField(fieldName, p)
-	input := `<input type="hidden" name="` + name + `" class="richtext-value ` + fieldName + `" value="` + val + `"/>`
+	input := `<input type="hidden" name="` + name + `" class="richtext-value ` + fieldName + `" value="` + html.EscapeString(val) + `"/>`
 
 	// build the dom tree for the entire richtext component
 	iso = append(iso, domElement(div)...)

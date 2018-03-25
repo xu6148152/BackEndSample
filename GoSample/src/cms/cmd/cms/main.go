@@ -7,6 +7,7 @@ import (
 
 	"cms/system/api"
 	"cms/system/db"
+	"cms/system/admin"
 )
 
 var usage = `

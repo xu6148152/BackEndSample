@@ -8,12 +8,18 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
+	"io"
+	"strconv"
+	"time"
+	"encoding/base64"
 
 	"cms/content"
 	"cms/management/manager"
 	"cms/management/editor"
 	"cms/system/db"
-	"strings"
+	"cms/system/admin/config"
+	"cms/system/admin/user"
 )
 
 const (
@@ -32,29 +38,124 @@ func init() {
 `
 )
 
-func init() {
-	http.HandleFunc("/admin", func(res http.ResponseWriter, req *http.Request) {
-		adminView, err := Admin(nil)
+func storeFileUpload(req *http.Request) (map[string]string, error) {
+	err := req.ParseMultipartForm(1024 * 1024 * 4)
+	if err != nil {
+		return nil, fmt.Errorf("%s", err)
+	}
+
+	ts := req.FormValue("timestamp")
+
+	urlPaths := make(map[string]string)
+	date := make(map[string]int)
+	if ts == "" {
+		now := time.Now()
+		date["year"] = now.Year()
+		date["month"] = int(now.Month())
+		date["day"] = now.Day()
+
+		ts = fmt.Sprintf("%d-%02d-%02d", date["year"], date["month"], date["day"])
+		req.PostForm.Set("timestamp", ts)
+	} else {
+		tsParts := strings.Split(ts, "-")
+		year, err := strconv.Atoi(tsParts[0])
 		if err != nil {
-			fmt.Println(err)
-			res.WriteHeader(http.StatusInternalServerError)
-			return
+			return nil, fmt.Errorf("%s", err)
 		}
-		res.Header().Set("Cotent-Type", "text/html")
-		res.Write(adminView)
-	})
+
+		month, err := strconv.Atoi(tsParts[1])
+		if err != nil {
+			return nil, fmt.Errorf("%s", err)
+		}
+
+		day, err := strconv.Atoi(tsParts[2])
+		if err != nil {
+			return nil, fmt.Errorf("%s", err)
+		}
+
+		date["year"] = year
+		date["month"] = month
+		date["day"] = day
+	}
+
+	pwd, err := os.Getwd()
+	if err != nil {
+		err := fmt.Errorf("Failed to locate current directory: %s", err)
+		return nil, err
+	}
+
+	tsParts := strings.Split(ts, "-")
+	urlPathPrefix := "api"
+	uploadDirName := "uploads"
+
+	uploadDir := filepath.Join(pwd, uploadDirName, tsParts[0], tsParts[1])
+	err = os.MkdirAll(uploadDir, os.ModeDir|os.ModePerm)
+
+	// loop over all files and save them to disk
+	for name, fds := range req.MultipartForm.File {
+		filename := fds[0].Filename
+		src, err := fds[0].Open()
+		if err != nil {
+			err := fmt.Errorf("Couldn't open uploaded file: %s", err)
+			return nil, err
+
+		}
+		defer src.Close()
+
+		// check if file at path exists, if so, add timestamp to file
+		absPath := filepath.Join(uploadDir, filename)
+
+		if _, err := os.Stat(absPath); !os.IsNotExist(err) {
+			fmt.Println(err, "file at", absPath, "exists")
+			filename = fmt.Sprintf("%d-%s", time.Now().Unix(), filename)
+			absPath = filepath.Join(uploadDir, filename)
+		}
+
+		dst, err := os.Create(absPath)
+		if err != nil {
+			err := fmt.Errorf("Failed to create destination file for upload: %s", err)
+			return nil, err
+		}
+
+		// copy file from src to dst on disk
+		if _, err = io.Copy(dst, src); err != nil {
+			err := fmt.Errorf("Failed to copy uploaded file to destination: %s", err)
+			return nil, err
+		}
+
+		// add name:urlPath to req.PostForm to be inserted into db
+		urlPath := fmt.Sprintf("/%s/%s/%s/%s/%s", urlPathPrefix, uploadDirName, tsParts[0], tsParts[1], filename)
+
+		urlPaths[name] = urlPath
+	}
+
+	return urlPaths, nil
+}
+
+func Run() {
+	http.HandleFunc("/admin", user.Auth(adminHandler))
 
 	http.HandleFunc("/admin/static/", func(res http.ResponseWriter, req *http.Request) {
 		path := req.URL.Path
+		pathParts := strings.Split(path, "/")[1:]
 		pwd, err := os.Getwd()
 		if err != nil {
 			log.Fatal("Coudln't get current directory to set static asset source.")
 		}
 
-		http.ServeFile(res, req, filepath.Join(pwd, "system", path))
+		filePathParts := make([]string, len(pathParts)+2, len(pathParts)+2)
+		filePathParts = append(filePathParts, pwd)
+		filePathParts = append(filePathParts, "system")
+		filePathParts = append(filePathParts, pathParts...)
+
+		http.ServeFile(res, req, filepath.Join(filePathParts...))
 	})
 
-	http.HandleFunc("/admin/configure", func(res http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/admin/init", func(res http.ResponseWriter, req *http.Request) {
+		if db.SystemInitComplete() {
+			http.Redirect(res, req, req.URL.Scheme+req.URL.Host+"/admin", http.StatusFound)
+			return
+		}
 		adminView, err := Admin(nil)
 		if err != nil {
 			fmt.Println(err)
@@ -62,8 +163,145 @@ func init() {
 			return
 		}
 
-		res.Header().Set("Content-Type", "text/html")
-		res.Write(adminView)
+		switch req.Method {
+		case http.MethodGet:
+			view, err := Init()
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+			res.Header().Set("Content-Type", "text/html")
+			res.Write(view)
+
+		case http.MethodPost:
+			err := req.ParseForm()
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			// get the site name from post to encode and use as secret
+			name := []byte(req.FormValue("name"))
+			secret := base64.StdEncoding.EncodeToString(name)
+			req.Form.Set("client_secret", secret)
+
+			err = db.SetConfig(req.Form)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			email := req.FormValue("email")
+			password := req.FormValue("password")
+			usr := user.NewUser(email, password)
+
+			_, err = db.SetUser(usr)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			// add _token cookie for login persistence
+			week := time.Now().Add(time.Hour * 24 * 7)
+			claims := map[string]interface{}{
+				"exp":  week.Unix(),
+				"user": usr.Email,
+			}
+
+			jwt.Secret([]byte(secret))
+			token, err := jwt.New(claims)
+
+			http.SetCookie(res, &http.Cookie{
+				Name:    "_token",
+				Value:   token,
+				Expires: week,
+			})
+
+			redir := strings.TrimSuffix(req.URL.String(), "/init")
+			http.Redirect(res, req, redir, http.StatusFound)
+
+		default:
+			res.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	})
+
+	http.HandleFunc("/admin/login", loginHandler)
+	http.HandleFunc("/admin/logout", logoutHandler)
+
+	http.HandleFunc("/admin/configure", func(res http.ResponseWriter, req *http.Request) {
+		switch req.Method {
+		case http.MethodGet:
+			data, err := db.ConfigAll()
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			c := &config.Config{}
+
+			err = json.Unmarshal(data, c)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			cfg, err := c.MarshalEditor()
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			adminView, err := Admin(cfg)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			res.Header().Set("Content-Type", "text/html")
+			res.Write(adminView)
+
+		case http.MethodPost:
+			err := req.ParseForm()
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			err = db.SetConfig(req.Form)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			http.Redirect(res, req, req.URL.String(), http.StatusFound)
+
+		default:
+			res.WriteHeader(http.StatusMethodNotAllowed)
+		}
+
+	})
+
+	http.HandleFunc("/admin/configure/users", func(res http.ResponseWriter, req *http.Request) {
+		switch req.Method {
+		case http.MethodGet:
+			// list all users and delete buttons
+
+		case http.MethodPost:
+			// create new user
+
+		default:
+			res.WriteHeader(http.StatusMethodNotAllowed)
+		}
 	})
 
 	http.HandleFunc("/admin/posts", func(res http.ResponseWriter, req *http.Request) {
@@ -73,20 +311,20 @@ func init() {
 			res.WriteHeader(http.StatusBadRequest)
 		}
 
-		posts := db.GetAll(t)
+		posts := db.ContentAll(t)
 		b := &bytes.Buffer{}
 		p := content.Types[t]().(editor.Editable)
 
-		html := `<div class="col s9">
-					<div class="card">
-					<ul class="card-content collection posts">
-					<div class="card-title">` + t + ` Items</div>`
+		html := `<div class="col s9 card">
+					<div class="card-content row">
+					<div class="card-title">` + t + ` Items</div>
+					<ul class="posts">`
 
 		for i := range posts {
 			json.Unmarshal(posts[i], &p)
-			post := `<div class="row collection-item"><li class="col s12 collection-item"><a href="/admin/edit?type=` +
+			post := `<li class="col s12"><a href="/admin/edit?type=` +
 				t + `&id=` + fmt.Sprintf("%d", p.ContentID()) +
-				`">` + p.ContentName() + `</a></li></div>`
+				`">` + p.ContentName() + `</a></li>`
 			b.Write([]byte(post))
 		}
 
@@ -124,7 +362,7 @@ func init() {
 			post := contentType()
 
 			if i != "" {
-				data, err := db.Get(t + ":" + i)
+				data, err := db.Content(t + ":" + i)
 				if err != nil {
 					fmt.Println(err)
 					res.WriteHeader(http.StatusInternalServerError)
@@ -159,8 +397,38 @@ func init() {
 			res.Header().Set("Content-Type", "text/html")
 			res.Write(adminView)
 		case http.MethodPost:
+			err := req.ParseMultipartForm(1024 * 1024 * 4)
 			cid := req.FormValue("id")
 			t := req.FormValue("type")
+
+			ts := req.FormValue("timestamp")
+
+			// create a timestamp if one was not set
+			date := make(map[string]int)
+			if ts == "" {
+				now := time.Now()
+				date["year"] = now.Year()
+				date["month"] = int(now.Month())
+				date["day"] = now.Day()
+
+				// create timestamp format 'yyyy-mm-dd' and set in PostForm for
+				// db insertion
+				ts = fmt.Sprintf("%d-%02d-%02d", date["year"], date["month"], date["day"])
+				req.PostForm.Set("timestamp", ts)
+			}
+
+			urlPaths, err := storeFileUploads(req)
+			if err != nil {
+				fmt.Println(err)
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+
+			for name, urlPath := range urlPaths {
+				req.PostForm.Add(name, urlPath)
+			}
+
+			fmt.Println(req.PostForm)
 
 			var discardKeys []string
 			for k, v := range req.PostForm {
@@ -180,7 +448,7 @@ func init() {
 				req.PostForm.Del(discardKey)
 			}
 
-			id, err := db.Set(t+":"+cid, req.PostForm)
+			id, err := db.SetContent(t+":"+cid, req.PostForm)
 			if err != nil {
 				fmt.Println(err)
 				res.WriteHeader(http.StatusInternalServerError)
@@ -193,6 +461,39 @@ func init() {
 			sid := fmt.Sprintf("%d", id)
 			desURL := scheme + host + path + "?type=" + t + "&id=" + sid
 			http.Redirect(res, req, desURL, http.StatusFound)
+		default:
+			res.WriteHeader(http.StatusMethodNotAllowed)
 		}
+	})
+	http.HandleFunc("/admin/edit/upload", func(res http.ResponseWriter, req *http.Request) {
+		if req.Method != http.MethodPost {
+			res.WriteHeader(http.StatusMethodNotAllowed)
+			return
+		}
+
+		urlPaths, err := storeFileUpload(req)
+		if err != nil {
+			fmt.Println("Couldn't store file uploads.", err)
+			res.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		res.Header().Set("Content-Type", "application/json")
+		res.Write([]byte(`{"data": [{"url": "` + urlPaths["file"] + `"}]}`))
+	})
+	http.HandleFunc("/api/uploads/", func(res http.ResponseWriter, req *http.Request) {
+		path := req.URL.Path
+		pathParts := strings.Split(path, "/")[2:]
+
+		pwd, err := os.Getwd()
+		if err != nil {
+			log.Fatal("Coudln't get current directory to set static asset source.")
+		}
+
+		filePathParts := make([]string, len(pathParts)+1, len(pathParts)+1)
+		filePathParts = append(filePathParts, pwd)
+		filePathParts = append(filePathParts, pathParts...)
+
+		http.ServeFile(res, req, filepath.Join(filePathParts...))
 	})
 }

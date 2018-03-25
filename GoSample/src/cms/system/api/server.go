@@ -39,7 +39,7 @@ func init() {
 			return
 		}
 
-		posts := db.GetAll(t)
+		posts := db.ContentAll(t)
 		var all = []json.RawMessage{}
 		for _, post := range posts {
 			all = append(all, post)
