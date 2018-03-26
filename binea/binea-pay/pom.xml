@@ -28,5 +28,6 @@
         <module>binea-pay-sdk</module>
         <module>binea-pay-web</module>
         <module>binea-pay-admin</module>
+        <module>binea-pay-common</module>
     </modules>
 </project>

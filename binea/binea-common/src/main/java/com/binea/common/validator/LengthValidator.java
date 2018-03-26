@@ -27,9 +27,9 @@ public class LengthValidator extends ValidatorHandler<String> implements Validat
     public boolean validate(ValidatorContext context, String s) {
         if (null == s || s.length() > max || s.length() < min) {
             context.addError(ValidationError.create(String.format("%s长度必须介于%s~%s之间！", fieldName, min, max))
-                    .setErrorCode(-1)
-                    .setField(fieldName)
-                    .setInvalidValue(s));
+                                     .setErrorCode(-1)
+                                     .setField(fieldName)
+                                     .setInvalidValue(s));
             return false;
         }
         return true;
