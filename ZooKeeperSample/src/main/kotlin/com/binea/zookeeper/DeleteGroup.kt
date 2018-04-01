@@ -23,3 +23,10 @@ class DeleteGroup : ConnectionWatcher() {
         }
     }
 }
+
+fun main(args: Array<String>) {
+    val deleteGroup = DeleteGroup()
+    deleteGroup.connect(args[0])
+    deleteGroup.delete(args[1])
+    deleteGroup.close()
+}

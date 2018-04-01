@@ -14,7 +14,14 @@ class JoinGroup : ConnectionWatcher() {
     @Throws(KeeperException::class, InterruptedException::class)
     fun join(groupName: String, memberName: String) {
         val path = "/$groupName/$memberName"
-        val createdPath = zk!!.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT)
+        val createdPath = zk!!.create(path, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL)
         System.out.println("Created $createdPath")
     }
+}
+
+fun main(args: Array<String>) {
+    val joinGroup = JoinGroup()
+    joinGroup.connect(args[1])
+    joinGroup.join(args[1], args[2])
+    Thread.sleep(Long.MAX_VALUE)
 }

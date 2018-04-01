@@ -27,3 +27,11 @@ class ListGroup : ConnectionWatcher() {
         }
     }
 }
+
+@Throws(Exception::class)
+fun main(args: Array<String>) {
+    val listGroup = ListGroup()
+    listGroup.connect(args[0])
+    listGroup.list(args[1])
+    listGroup.close()
+}

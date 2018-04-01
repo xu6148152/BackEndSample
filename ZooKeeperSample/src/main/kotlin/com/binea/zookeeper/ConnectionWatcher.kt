@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch
  * TIME: 3:08 PM
  */
 open class ConnectionWatcher : Watcher {
+
     companion object {
         val SESSION_TIMEOUT: Int = 5000
     }
@@ -20,8 +21,8 @@ open class ConnectionWatcher : Watcher {
     var connectedSignal: CountDownLatch = CountDownLatch(1)
 
     @Throws(IOException::class, InterruptedException::class)
-    fun connect(hosts: String?) {
-        zk = ZooKeeper(hosts, CreateGroup.SESSION_TIMEOUT, this)
+    fun connect(hosts: String) {
+        zk = ZooKeeper(hosts, SESSION_TIMEOUT, this)
         connectedSignal.await()
     }
 
@@ -33,6 +34,6 @@ open class ConnectionWatcher : Watcher {
 
     @Throws(InterruptedException::class)
     fun close() {
-        zk!!.close()
+        zk?.close()
     }
 }
