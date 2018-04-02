@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>com.binea</groupId>
-            <artifactId>binea-pay-service</artifactId>
+            <artifactId>binea-pay-rpc-api</artifactId>
             <version>1.0.0</version>
             <type>jar</type>
         </dependency>
