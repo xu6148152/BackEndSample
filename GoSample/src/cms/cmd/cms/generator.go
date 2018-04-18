@@ -11,7 +11,7 @@ import (
 )
 
 func generateContentType(name string) error {
-	fileName := strings.ToLower(name) + ".go"
+	fileName := strings.ToLower(name) + ".go" 
 	typeName := strings.ToUpper(string(name[0])) + string(name[1:])
 
 	// contain processed name an info for template
