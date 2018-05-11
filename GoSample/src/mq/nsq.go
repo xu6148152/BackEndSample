@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bitly/settings"
 	"flag"
 	"log"
 	"os"
@@ -38,10 +37,10 @@ func main() {
 		defer pprof.StopCPUProfile()
 	}
 
-	err := settings.Load(*settingsFile, *environment)
-	if err != nil {
-		log.Fatal("settings.Load:", err)
-	}
+	// err := settings.Load(*settingsFile, *environment)
+	// if err != nil {
+	// 	log.Fatal("settings.Load:", err)
+	// }
 
 	go func() {
 		<-signalChan
