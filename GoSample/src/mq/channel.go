@@ -177,7 +177,7 @@ func (c *Channel) popInFlightMessage(uuidStr string) (*Message, error) {
 	}
 	delete(c.inFlightMessages, uuidStr)
 	msg.EndTimer()
-	return msg, nil
+	return msg, nil  
 }
 
 // GetMessage pulls a single message off the client channel
