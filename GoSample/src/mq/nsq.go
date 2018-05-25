@@ -18,6 +18,7 @@ var memQueueSize = flag.Int("mem-queue-size", 10000, "number of messages to keep
 var cpuProfile = flag.String("cpu-profile", "", "write cpu profile to file")
 
 func main() {
+	log.Printf("main start")
 	runtime.GOMAXPROCS(4)
 
 	nsqEndChan := make(chan int)

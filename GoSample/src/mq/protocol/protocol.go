@@ -1,4 +1,4 @@
-package main
+package protocol
 
 type Protocol interface {
 	IOLoop(client *Client) error

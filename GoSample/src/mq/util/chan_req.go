@@ -1,4 +1,4 @@
-package main
+package util
 
 type ChanReq struct {
 	variable interface{}
