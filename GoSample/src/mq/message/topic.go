@@ -2,6 +2,8 @@ package message
 
 import (
 	"log"
+	"../queue"
+	"../util"
 )
 
 type Topic struct {

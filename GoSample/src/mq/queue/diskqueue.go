@@ -1,6 +1,7 @@
 package queue
 
 import (
+	"../util"
 	"bytes"
 	"encoding/binary"
 	"fmt"

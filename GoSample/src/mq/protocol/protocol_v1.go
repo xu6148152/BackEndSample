@@ -1,6 +1,8 @@
 package protocol
 
 import (
+	"../message"
+	"../util"
 	"bufio"
 	"bytes"
 	"log"

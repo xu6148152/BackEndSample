@@ -1,6 +1,7 @@
 package server
 
 import (
+	"../protocol"
 	"encoding/binary"
 	"log"
 	"net"

@@ -7,6 +7,7 @@ import (
 	"log"
 	"testing"
 	"strconv"
+	"../util"
 )
 
 func TestGetTopic(t *testing.T) {
